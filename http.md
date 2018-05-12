@@ -25,3 +25,7 @@
 ## HTTPS (Hypertext Transfer Protocol over Secure Sockets Layer)
 * HTTP처럼 TCP 소켓으로 바로 사용하지 않고 SSL 소켓으로 내려보냅니다.
 * 인터넷 상에서 데이터를 주고 받을 때 보안이 되는 프로토콜입니다.
+
+***
+### 참고 자료
+* http://www.edwith.org/boostcourse-web
