@@ -8,3 +8,16 @@
         ArrayList가 있습니다.
     * Queue: 여러 개의 객체를 처리하기 전에 담아서 처리할 때 사용하기 위한 인터페이스
         > 기본적으로 FIFO를 따릅니다.
+        
+## Collection 관련 클래스의 동기화
+* 동기화되지 않은 클래스
+    > HashSet, TreeSet, LinkedHashSet, ArrayList, LinkedList, HashMap, TreeMap, LinkedHashMap
+* 동기화되어 있는 클래스
+    > Vector, HashTable
+    
+## Sun에서 정리한, 각 인터페이스별 가장 일반적으로 사용되는 클래스
+인터페이스 | 클래스
+-----|-----
+Set | HashSet
+List | ArrayList
+Queue | LinkedList
