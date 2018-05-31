@@ -3,7 +3,7 @@
 * 그래서 synchronized를 사용하여 동기화를 하는 것입니다.
 * 이 식별자를 사용하면 "천천히 하나씩 들어오세요."라고 해당 메소드나 블럭에서 제어하게 됩니다.
 
-*코드 예제
+* 코드 예제
 ```
 public synchronized void sampleMethod() {
     ...
