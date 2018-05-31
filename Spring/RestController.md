@@ -31,7 +31,7 @@ public class IndexController {
     }
 }
 ```
-![controller_flow](../img/controller_flow.png)
+![controller_flow](./img/controller_flow.png)
 
 ### @RestController
 * @Controller에 반해 @RestController에서 return 되는 값은 view를 통해서 출력되는 것이 아니라
@@ -58,7 +58,7 @@ public class StudentRestController {
     }
 }
 ```
-![rest_controller_flow](../img/rest_controller_flow.png)
+![rest_controller_flow](./img/rest_controller_flow.png)
 
 ## MessageConverter
 * 적절한 응답을 하기 위해 응답을 바꿔주는 MessageConverter들은 HttpMessageConverter 인터페이스를 상속 받고 있습니다.
