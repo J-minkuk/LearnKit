@@ -1,0 +1,156 @@
+# Java Garbage Collection의 종류
+* JVM 내부에서 GC 작업을 수행하는 엔진을 garbage collector라고 부릅니다.
+* JVM 내부에는 garbage collector가 여러 개 구현되어 있고, JVM을 실행할 때 command line parameter로 garbage collector를 선택할 수 있습니다.
+
+---
+
+## Serial Garbage Collector
+* CPU 코어의 수가 1개일 때, Serial GC가 사용됩니다.
+* minor gc, major gc 모두 싱글 스레드로 실행됩니다.
+* compact 작업까지 수행합니다.
+
+CPU가 많은 서버에서 Serial GC를 사용하기도 하는데, 서버 1대에 JVM 여러 개를 동시에 실행하는 경우에 그렇습니다.
+* 서버 OS에서 JVM 1개는 하나의 OS 프로세스로 실행됩니다.
+* 하나의 OS 프로세스 내부에 스레드가 여러 개 실행될 수 있습니다.
+* 즉, 서버 1대에 여러 개의 JVM 프로세스가 실행되는 경우, 각 JVM 내부에서는 Serial GC를 사용하기도 합니다.
+* JVM 프로세스 뿐만 아니라 다른 프로세스들도 같이 실행되는 서버에서는 JVM 프로세스가 CPU 코어를 독점하는 것을 방지하기 위해, Serial GC를 선택할 수도 있습니다.
+
+### Serial GC를 선택하는 경우 요약
+* CPU 코어가 1개인 경우
+* CPU 코어가 여러 개이지만, JVM 프로세스 혼자 CPU 코어를 독점하면 안되는 경우
+* Serial GC 동안의 멈춤(stop-the-world) 현상을 허용할 수 있는 경우
+* Heap의 크기가 100MB 이하 정도로 작은 경우
+
+### command line option
+* -XX:+UseSerialGC
+```
+java -XX:+UseSerialGC -jar demo.jar
+```
+
+---
+
+## Parallel Garbage Collector
+* young generation 영역의 GC를 멀티 스레드로 실행합니다.
+* CPU 코어가 여러 개인 경우, parallel GC가 디폴트로 설정되고, 코어 수만큼의 스레드로 GC를 수행합니다.
+* parallel GC는 parallel GC와 parallel Old GC로 나뉩니다.
+* young generation 영역의 GC를 멀티 스레드로 실행하는 것은 2가지 parallel GC에서 공통으로 적용됩니다.
+* young generation 영역의 GC = makr + copy
+* mark + copy 작업은 멀티 스레드로 실행될 수 있습니다.
+
+### Parallel GC
+* old generation 영역의 GC = 싱글 스레드
+* old generation 영역의 GC = mark + sweep + compact
+* sweep + compact 작업은 멀티 스레드로 실행될 수 없고, 싱글 스레드로 수행되어야 합니다.
+
+### Parallel Old GC
+* old generation 영역의 GC = 멀티 스레드
+* old generation 영역의 GC = mark + sweep + compact
+* sweep + compact 작업은 멀티 스레드로 실행될 수 있습니다.
+* Parallel Old GC를 Parallel Compacting GC라고 부르기도 합니다.
+
+### Parallel GC를 선택하는 경우 요약
+* CPU 코어들을 전부 활용하여 JVM 프로세스의 성능을 최대로 높이고자 할 경우
+* JVM 프로세스가 CPU 코어들을 전부 독점해도 되는 경우
+* Parallel GC 동안의 멈춤(stop-the-world) 현상을 허용할 수 있는 경우 (Serial GC 경우보다는 짧습니다.)
+* CPU 코어 수가 많고, 메모리 용량도 큰 경우, Parallel GC가 Default로 선택됩니다.
+
+### command line option
+* -XX:+UseParallelGC
+    > Parallel GC
+* -XX:+UseParallelOldGC
+    > Parallel Old GC
+* -XX:ParallelGCThreads=스레드 수
+    > Parallel GC가 사용할 스레드 수를 제한하기 위한 선택 옵션, 이 옵션을 지정하지 않으면 CPU 코어 수 만큼의 스레드를 사용
+
+---
+
+## Concurrent Mark Sweep Collector
+* 앞글자만 따서 CMS Collector라고 부릅니다.
+* Concurrent low pause collector라고 부르기도 합니다.
+* GC 작업 동안의 정지(stop-the-world) 기간을 최대한 줄이기 위해 선택합니다.
+* GC 작업 동안 애플리케이션 스레드도 같이 실행될 수 있도록 고안된 GC이기 때문에 정지 시간이 매우 짧습니다.
+* CMS GC는 총 6단계의 작업으로 구성되는데, 이 중에서 두 단계만 애플리케이션이 정지되고 네 단계에서는 애플리케이션 스레드와 GC 스레드가 동시에 실행됩니다.
+* GC 작업이 애플리케이션 스레드와 동시에 실행될 수 있어야 하기 때문에 GC 작업이 약간 비효율적으로 진행됩니다.
+* 이러한 비효율 때문에, 정해진 시간 동안 처리한 작업량을 비교해보면 CMS GC가 Parallel GC보다 뒤쳐집니다.
+* 그리고, compact 작업을 포함하지 않기 때문에 메모리 공간도 낭비됩니다.
+
+### full stop-the-world collection
+* old generation 영역이 가득 찬 경우, 애플리케이션 스레드들이 모두 멈춘 상태(stop-the-world)에서
+전체 메모리 영역에 대한 GC가 진행됩니다.
+* 이 작업의 정지 시간이 꽤 길어집니다.
+* 이때는 compact 작업도 포함됩니다.
+
+### CMS GC의 장단점
+* 장점: 정지(stop-the-world) 시간이 매우 짧습니다.
+* 단점
+    * compact 작업을 하지 않기 때문에 메모리 공간이 낭비됩니다.
+    * 정해진 시간 동안 처리한 작업량(throughout)이 Parallel GC보다 적습니다.
+    * 가끔 full stop-the-world collection 작업이 필요할 수 있고, 이때는 정지 시간이 깁니다.
+    
+### CMS GC를 선택하는 경우 요약
+* GC 동안 멈춤(stop-the-world) 현상을 허용할 수 있고, 애플리케이션이 언제나 즉시 반응해야 하는 경우
+* JVM 프로세스가 CPU 코어들을 전부 독점해도 되는 경우
+* Heap의 크기가 4GB 이하인 경우 (Heap의 크기가 4GB 이상이면, G1 GC를 사용해야 합니다.)
+
+### command line option
+* -XX:+UseConcMarkSweepGC
+* -XX:ParallelCMSThreads=스레드 수
+
+---
+
+## G1 Garbage Collector
+* G1 garbage collector는 Java 7부터 제공됩니다.
+* 장기적으로 CMS collection을 대체하려고 개발된 GC입니다.
+* 크기가 4GB 이상인 Heap에 대한 효율적인 GC를 위해 개발되었습니다.
+* full stop-the-world collection 작업이 필요한 상황의 발생 확률이 CMS GC보다 낮습니다.
+* CMS GC와 달리 compact 작업을 포함합니다.  
+
+---
+
+## JVM 프로세스 수
+
+### 전략 1: JVM 프로세스 1 개
+* 서버 1대에 JVM 프로세스 1개만 실행합니다.
+* 자바로 구현된 서비스들을 모두 이 프로세스에서 실행합니다.
+* 서비스를 동시에 여러 개 실행하려면, 많은 메모리가 필요할테니 JVM의 heap 크기를 4GB 이상으로 설정합니다.
+
+장점
+* 서비스들 사이에 직접 메소드 호출이 가능하고, 파라미터나 리턴 값으로 데이터를 전달할 수 있습니다.
+
+단점
+* 4GB 보다 큰 Heap을 GC할 때, stop-the-world 시간이 10초 정도 길어질 수 있습니다.
+    > 이 단점은 G1 GC를 채택함으로써 해결할 수 있습니다.
+* 어느 한 서비스에 버그가 있어 에러가 발생하면, 같은 JVM에서 실행되는 다른 서비스들에게 영향을 줄 수 있습니다.
+
+### 전략 2: JVM 프로세스 여러 개
+* 서버 1대에 JVM 프로세스 여러 개를 실행합니다.
+* Java로 구현된 서비스들 각각을 별개의 JVM 프로세스에서 실행합니다.
+* 각각의 JVM 프로세스는 서비스를 하나만 실행할테니, JVM의 heap 크기를 적당한 크기로 제한합니다.
+
+장점
+* 각각의 JVM은 상대적으로 작은 크기의 heap을 GC하기 때문에, stop-the-world 시간이 짧습니다.
+* 어느 한 JVM 프로세스에서 에러가 발생하더라도 다른 JVM 프로세스에 영향을 주지 않습니다.
+* 서비스 단위로 배포하고 관리하기 용이합니다.
+
+단점
+* 서비스들 사이에 직접 메소드를 호출하는 것이 불가능하고, 명령이나 데이터를 주고 받기 위해 네트워크 통신이 필요합니다.
+
+---
+
+## Java VM command line parameter
+Java VM을 실행하기 위한 java.exe 명령의 command line parameter 중에서 메모리 설정과 관련된 것들은 다음과 같습니다.
+
+### -Xms숫자
+* heap 영역의 초기 크기를 설정합니다.
+    > -Xms6m : 6MB로 설정
+
+### -Xmx숫자
+* heap 영역의 최대 크기를 설정합니다.
+    > -Xmx80m : 80MB로 설정
+    
+### -Xmn숫자
+* young generation 영역의 크기를 설정합니다.
+
+### -XX:+UseStringDeduplicationJVM
+* Java 8 update20 JVM의 G1 Collector에는 String deduplication 기능이 추가되었습니다.
+* GC 과정에서 내용이 동일한 String 객체들을 찾아 중복된 부분을 제거해주는 기능입니다.
