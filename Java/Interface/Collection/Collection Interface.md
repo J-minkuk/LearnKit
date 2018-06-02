@@ -11,9 +11,9 @@
         
 ## Collection 관련 클래스의 동기화
 * 동기화되지 않은 클래스
-    > HashSet, TreeSet, LinkedHashSet, ArrayList, LinkedList, HashMap, TreeMap, LinkedHashMap
+    > HashSet, TreeSet, LinkedHashSet, ArrayList, LinkedList
 * 동기화되어 있는 클래스
-    > Vector, HashTable
+    > Vector
     
 ## Sun에서 정리한, 각 인터페이스별 가장 일반적으로 사용되는 클래스
 인터페이스 | 클래스
