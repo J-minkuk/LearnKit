@@ -26,6 +26,7 @@ public void sampleBlock() {
 ```
 public class Contribution {
     private int amount = 0;
+    
     public synchronized void donate() {
         amount++;
     }
@@ -35,7 +36,7 @@ public class Contribution {
 }
 ```
 ```
-public class Contribution extends Thread {
+public class Contributor extends Thread {
     private Contribution myContribution;
     private String myName;
     
@@ -45,8 +46,9 @@ public class Contribution extends Thread {
     }
     
     public void run() {
-        for (int loop = 0; loop < 1000; ++loop)
+        for (int loop = 0; loop < 1000; ++loop) {
             myContribution.donate();
+        }
         System.out.format("%s total = %d\n", myName, myContribution.getTotal());
     }
 }
@@ -62,8 +64,9 @@ public class ContributeTest {
             crs[loop] = new Contributor(group, " Contributor" + loop);
         
         // 기부 실행
-        for (int loop = 0; loop < 10; ++loop)
+        for (int loop = 0; loop < 10; ++loop) {
             crs[loop].start();
+        }
     }
 }
 ```
@@ -72,6 +75,7 @@ public class ContributeTest {
 ```
 public class Contribution {
     private static int amount = 0;
+    
     public static synchronized void donate() {
         amount++;
     }
@@ -81,7 +85,7 @@ public class Contribution {
 }
 ```
 ```
-public class Contribution extends Thread {
+public class Contributor extends Thread {
     private Contribution myContribution;
     private String myName;
     
@@ -91,8 +95,9 @@ public class Contribution extends Thread {
     }
     
     public void run() {
-        for (int loop = 0; loop < 1000; ++loop)
+        for (int loop = 0; loop < 1000; ++loop) {
             myContribution.donate();
+        }
         System.out.format("%s total = %d\n", myName, myContribution.getTotal());
     }
 }
@@ -109,8 +114,9 @@ public class ContributeTest {
         }
         
         // 기부 실행
-        for (int loop = 0; loop < 10; ++loop)
+        for (int loop = 0; loop < 10; ++loop) {
             crs[loop].start();
+        }
     }
 }
 ```
