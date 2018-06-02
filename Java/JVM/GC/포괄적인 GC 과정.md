@@ -39,13 +39,15 @@ GC 과정(알고리즘)은 mark, sweep, compact 작업으로 구성됩니다.
 ## Card Table
 * old generation 영역 객체의 멤버 변수가 young generation 영역 객체를 참조하는 경우는 드뭅니다.
 * old generation 영역 객체의 멤버 변수에 의해 참조되는 객체는 garbage가 아닙니다.
-* 따라서, young generation 영역을 청소할 때, old generation 영역 객체의 멤버 변수들도 다 검사하여 mark를 해야 하는데, 이 작업에 많은 시간이 소요됩니다.
+* 따라서, young generation 영역을 청소할 때, old generation 영역 객체의 멤버 변수들도 모두 검사하여 mark 작업을 해야 하는데, 이 작업에 많은 시간이 소요됩니다.
 * 그래서 old generation 영역 멤버 변수가 young generation 영역 객체를 참조하는 경우, 이 정보를 card table에 기록합니다.
 
 ### card table의 장단점
-* 장점 : young generation 영역을 청소하기 위해 mark 할 때, old generation 영역 멤버 변수를 전부 검사할 필요없이 card table 기록만 보면 됩니다.
-* 단점 : old generation 영역 멤버 변수에 young generation 영역 객체를 대입할 때마다 card table에 그 정보를 기록해야 합니다.
-단점보다 장점의 이득이 크기 때문에 card table을 사용하여 GC를 진행합니다.
+* 장점
+    * young generation 영역을 청소하기 위해 mark 할 때, old generation 영역 멤버 변수를 전부 검사할 필요없이 card table 기록만 보면 됩니다.
+* 단점
+    * old generation 영역 멤버 변수에 young generation 영역 객체를 대입할 때마다 card table에 그 정보를 기록해야 합니다.
+    * 단점보다 장점의 이득이 크기 때문에 card table을 사용하여 GC를 진행합니다.
 
 ## Heap 영역 구조
 ![Heap](../img/gc/heap_area_structure.png)

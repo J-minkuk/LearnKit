@@ -34,7 +34,7 @@ java -XX:+UseSerialGC -jar demo.jar
 * CPU 코어가 여러 개인 경우, parallel GC가 디폴트로 설정되고, 코어 수만큼의 스레드로 GC를 수행합니다.
 * parallel GC는 parallel GC와 parallel Old GC로 나뉩니다.
 * young generation 영역의 GC를 멀티 스레드로 실행하는 것은 2가지 parallel GC에서 공통으로 적용됩니다.
-* young generation 영역의 GC = makr + copy
+* young generation 영역의 GC = mark + copy
 * mark + copy 작업은 멀티 스레드로 실행될 수 있습니다.
 
 ### Parallel GC
@@ -81,7 +81,8 @@ java -XX:+UseSerialGC -jar demo.jar
 * 이때는 compact 작업도 포함됩니다.
 
 ### CMS GC의 장단점
-* 장점: 정지(stop-the-world) 시간이 매우 짧습니다.
+* 장점
+    * 정지(stop-the-world) 시간이 매우 짧습니다.
 * 단점
     * compact 작업을 하지 않기 때문에 메모리 공간이 낭비됩니다.
     * 정해진 시간 동안 처리한 작업량(throughout)이 Parallel GC보다 적습니다.
@@ -100,7 +101,7 @@ java -XX:+UseSerialGC -jar demo.jar
 
 ## G1 Garbage Collector
 * G1 garbage collector는 Java 7부터 제공됩니다.
-* 장기적으로 CMS collection을 대체하려고 개발된 GC입니다.
+* 장기적으로 CMS collection을 대체하기 위해 개발된 GC입니다.
 * 크기가 4GB 이상인 Heap에 대한 효율적인 GC를 위해 개발되었습니다.
 * full stop-the-world collection 작업이 필요한 상황의 발생 확률이 CMS GC보다 낮습니다.
 * CMS GC와 달리 compact 작업을 포함합니다.  
@@ -109,7 +110,7 @@ java -XX:+UseSerialGC -jar demo.jar
 
 ## JVM 프로세스 수
 
-### 전략 1: JVM 프로세스 1 개
+### 전략 1: JVM 프로세스 1개
 * 서버 1대에 JVM 프로세스 1개만 실행합니다.
 * 자바로 구현된 서비스들을 모두 이 프로세스에서 실행합니다.
 * 서비스를 동시에 여러 개 실행하려면, 많은 메모리가 필요할테니 JVM의 heap 크기를 4GB 이상으로 설정합니다.
@@ -130,7 +131,7 @@ java -XX:+UseSerialGC -jar demo.jar
 장점
 * 각각의 JVM은 상대적으로 작은 크기의 heap을 GC하기 때문에, stop-the-world 시간이 짧습니다.
 * 어느 한 JVM 프로세스에서 에러가 발생하더라도 다른 JVM 프로세스에 영향을 주지 않습니다.
-* 서비스 단위로 배포하고 관리하기 용이합니다.
+* 서비스 단위로 배포하고 관리하기에 용이합니다.
 
 단점
 * 서비스들 사이에 직접 메소드를 호출하는 것이 불가능하고, 명령이나 데이터를 주고 받기 위해 네트워크 통신이 필요합니다.

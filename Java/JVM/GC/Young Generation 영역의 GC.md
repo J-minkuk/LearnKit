@@ -1,14 +1,14 @@
 # Young Generation 영역의 GC 과정
 
-## Eden 영역과 Suvivor 영역
+## Eden 영역과 Survivor 영역
 ![before_gc](../img/gc/before_gc.png)
 * young generation 영역은 1개의 Eden 영역과 2개의 Survivor 영역으로 나뉩니다.
-* 두 Survivor 영역을 각각 survivor0, survivor2라고 하겠습니다.
+* 두 Survivor 영역을 각각 survivor0, survivor1 이라고 하겠습니다.
 * 처음 실행할 때, eden 영역과 두 survivor 영역 모두 빈 상태입니다.
 * 생성된 객체는 처음에 eden 영역에 위치합니다.
 
 ### GC collection #1
-![gc#1](../img/gc%231.png)
+![gc#1](../img/gc/gc%231.png)
 * eden 영역이 가득차면, young generation 영역 전체(eden + 2개의 survivor)를 GC합니다. (mark, sweep)
 
 ![gc#1end](../img/gc%231end.png)
@@ -17,21 +17,21 @@
 * gc 결과, eden 영역과 survivor1 영역은 빈 공간이 됩니다. 
 
 ### GC collection #2
-![gc#2](../img/gc%232.png)
+![gc#2](../img/gc/gc%232.png)
 * 객체들이 생성되어 eden 영역이 또 가득차면, young generation 영역 전체를 GC합니다.
 * eden 영역에서 살아남은 객체들을 전부 비어있던 survivor1 영역으로 옮깁니다. 이 객체들의 살아남은 횟수를 1로 기록합니다.
 * 그리고 survivor0 영역에서 살아남은 객체들도 survivor1 영역으로 옮깁니다. 이 객체들의 살아남은 횟수를 2로 기록합니다.
 
-![gc#2end](../img/gc%232end.png)
+![gc#2end](../img/gc/gc%232end.png)
 * gc 결과, eden 영역과 survivor0 영역은 빈 공간이 됩니다.
 
 ### GC collection #3
-![gc#3](../img/gc%233.png)
+![gc#3](../img/gc/gc%233.png)
 * 객체들이 생성되어 eden 영역이 또 가득차면, young generation 영역 전체를 GC합니다.
 * eden 영역에서 살아남은 객체들을 전부 비어있던 survivor0 영역으로 옮깁니다. 이 객체들의 살아남은 횟수를 1로 기록합니다.
 * 그리고 survivor1 영역에서 살아남은 객체들도 survivor0 영역으로 옮깁니다. 이 객체들의 살아남은 횟수에 1을 더해 기록합니다.
 
-![gc#3end](../img/gc%233end.png)
+![gc#3end](../img/gc/gc%233end.png)
 * gc 결과, eden 영역과 survivor1 영역은 빈 공간이 됩니다.
 
 ## Old generation 영역으로의 승격
