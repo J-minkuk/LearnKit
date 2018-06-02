@@ -11,7 +11,7 @@
 ![gc#1](../img/gc/gc%231.png)
 * eden 영역이 가득차면, young generation 영역 전체(eden + 2개의 survivor)를 GC합니다. (mark, sweep)
 
-![gc#1end](../img/gc%231end.png)
+![gc#1end](../img/gc/gc%231end.png)
 * gc를 하고 난 후, eden 영역에서 살아남은 객체들을 전부 survivor0 영역으로 옮깁니다. (compact)
 * survivor0 영역으로 이동된 객체의 살아남은 횟수를 1로 기록합니다.
 * gc 결과, eden 영역과 survivor1 영역은 빈 공간이 됩니다. 
