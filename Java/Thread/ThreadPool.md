@@ -1,0 +1,118 @@
+# ThreadPoolExecutor (java.util.concurrent)
+* java.util.concurrent 패키지에는 ThreadPoolExecutor라는 이름의 범용 스레드 풀 구현체가 추가되었습니다.
+* 해당 패키지 이전에는 모든 서블릿 컨테이너가 독자적인 스레드 풀을 구현해 사용했지만, 현재 대부분의 구현체는
+ThreadPoolExecutor 구현체로 스레드 풀 구현을 교체하거나 최소한 ThreadPoolExecutor와 인터페이스를 맞춘 구현체를 제공합니다.
+* 이 ThreadPoolExecutor 스레드 풀 구현체 자체가 기존의 스레드 풀에 비해 월등한 성능을 가졌다고 입증되어 그렇다기보다는
+언어 자체에서 제공하는 표준 구현체를 사용하는 것이 서블릿 컨테이너를 구현하는 사람들 사이에서도
+추가 커뮤니케이션 비용을 줄일 수 있기 때문이라고 할 수 있습니다.
+
+## 코드 예제
+* 아래 코드는 1번부터 13번까지 차례대로 출력되는 것을 확인할 수 있습니다.
+```
+public class WalkSerial {
+    public static void main(String[] args) {
+        WalkSerial ws = new WalkSerial();
+        System.out.println("오감도 - 이상");
+        ws.action(13);
+    }
+    
+    private void action(int size) {
+        System.out.printf("%d인의 아해가 도로를 질주하오.\n", size);
+        System.out.printf("(길은 막다른 골목이 적당하오.)\n\n");
+        for (int i = 0; i < size; ++i) {
+            printMessage(i+1);
+        }
+    }
+    
+    private Object lock = new Object();
+    private void printMessage(int index) {
+        synchronized(lock) {
+            try {
+                lock.wait(1000L);
+            } catch (InterruptedException e) {
+                
+            }
+            System.out.printf("제%d의 아해가 무섭다고 그러오.\n", index);
+        }
+    }
+}
+```
+
+* 아래코드는 ThreadPoolExecutor 예제입니다.
+```
+import java.util.concurrent.*;
+
+public class WalkParallel {
+    public static void main(String[] args) {
+        WalkParallel wp = new WalkParallel();
+        System.out.println("오감도 - 이상");
+        wp.action(13);
+    }
+    
+    private void action(int size) {
+        System.out.printf("%d인의 아해가 도로를 질주하오.\n", size);
+        System.out.printf("(길은 막다른 골목이 적당하오.)\n\n");
+        
+        ThreadPoolExecutor tpe = new ThreadPoolExecutor(10, 20, 60, TimeUnit.SECONDS, new SynchronousQueue<Runnable>());
+        for (int i = 0; i < size; ++i) {
+            tpe.execute(new People(i+1));
+        }
+        tpe.shutdown();
+    }
+    
+    class People implements Runnable {
+        private int index;
+        private Object lock = new Object();
+        public People(int index) {
+            this.index = index;
+        }
+        
+        public void run() {
+            synchronized(lock) {
+                try {
+                    lock.wait(1000L);
+                } catch (InterruptedException e) {
+                
+                }
+                System.out.printf("제%d의 아해가 무섭다고 그러오.\n", index);
+            }
+        }
+    }
+}
+```
+* 전체 수행은 2초 내로 종료되며, 순서에 상관없이 무작위로 나타납니다.
+* 또한, 스레드 풀은 내부에 요청이 들어왔을 때 처리하기 위해 대기 상태의 스레드를 계속 유지하므로 현재 작업 큐가 비었다고 자동으로 종료되지 않습니다.
+* 위 예제에서는 shutdown 메소드를 호출해 스레드 풀 자체를 종료시켰습니다.
+* 서블릿 컨테이너는 ThreadPoolExecutor의 LifeCycle을 적절히 관리해주어야 합니다.
+
+## ThreadPoolExecutor 사용
+* ThreadPoolExecutor의 사용은 비교적 직관적으로 이해할 수 있습니다.
+* 병렬로 수행할 작업을 Runnable 타입으로 생성해 ThreadPoolExecutor의 executor 메소드 인자로 넘겨주기만 하면 됩니다.
+* 여기서 주의할 점은 작업 큐로 사용할 BlockingQueue의 성질에 따라 미묘하게 3가지 다른 수행 방식이 있다는 것입니다.
+
+### 예제에서 사용한 SynchronousQueue는 수행 요청이 들어오면, 
+* 요청을 쌓아두지 않고 풀 내에 준비된 스레드를 즉시 매칭하여 처리합니다.
+* 따라서 스레드 풀 내에 준비된 스레드가 모두 다른 일을 수행한다면, 최대 가능 스레드 수가 초과되지 않는 한 즉시 새 스레드를 생성해 요청을 처리합니다.
+* 최대 가능 스레드 이상의 요청이 들어오면 해당 요청은 버려지므로 최대 가능 스레드 수는 제한이 없게 크게 설정하는 것이 일반적입니다.
+* 따라서 처리되는 속도보다 요청이 들어오는 속도가 더 빠르면 스레드의 수가 비정상적으로 증가할 수 있습니다.
+
+### 나머지 두 방식은 최대 가능 스레드 수에 제한 있는 큐를 사용하는 방식과 제한 없는 큐를 사용하는 방식입니다.
+* 이 두 방식에는 실질적으로 최대 가능 스레드 수는 의미가 없습니다.
+* 왜냐하면, ThreadPoolExecutor 생성자의 첫 번째 인자인 corePoolSize 수만큼만 스레드를 사용해 동작하며, 
+이상의 요청이 들어오면 스레드의 수를 늘리는 대신 추가 요청을 작업 큐에 쌓아 놓고 처리합니다.
+* 앞의 경우와 같이 처리되는 속도보다 요청이 들어오는 속도가 더 빠를 경우
+* 제한 없는 큐(LinkedBlockingQueue)는 큐의 크기가 비정상적으로 커지는 문제가 발생할 수 있습니다.
+* 반면, 제한 있는 큐(ArrayBlockingQueue)는 미리 정해진 큐 사이즈를 넘는 요청을 모두 버립니다. 
+* 따라서, 이 세 타입은 모두 서로 기능 및 안정성에 대한 Trade-Off가 있으며, 어떤 타입이 언제나 옳은 것이 아니라 사용되는 상황에 맞게 적절히 선택해야 합니다.
+
+## 적정 병렬 진행 수
+* 대부분의 서블릿 컨테이너에는 서블릿을 동작시키는 스레드의 숫자를 설정할 수 있습니다.
+* 즉, 서블릿을 처리하기 위해 스레드 풀이 내부적으로 유지하는 Walker 스레드의 숫자를 지정할 수 있으며
+이 값을 어떻게 설정하느냐에 따라 서블릿 컨테이너의 전체 처리량이 크게 영향을 받습니다.
+
+### 설정치를 구하기 위해 고려해야 할 사항
+* 컴퓨터의 연산 처리는 CPU가 수행합니다. 즉, CPU가 가진 core의 수만큼 계산 작업을 동시에 처리할 수 있습니다.
+* 이 말은 서블릿 컨테이너가 CPU 코어 수 미만의 스레드를 사용한다면 1개 이상의 CPU 코어는 서블릿 컨테이너가 사용하지 못한다는 의미입니다.
+* 따라서 최대 스레드 수 설정은 CPU 코어 수보다 작지 않아야 합니다.
+* 또한, 병렬 진행되어야 하는 스레드의 수가 CPU 코어 수보다 큰 경우, 모든 스레드가 동시에 CPU 코어를 사용할 수는 없습니다.
+* 다시 말해, 다수의 스레드가 소수의 CPU 코어를 이용하려면 특정 시간에는 반드시 하나 이상의 스레드가 CPU 코어를 점유하지 않고 대기 상태에 있어야 합니다.
