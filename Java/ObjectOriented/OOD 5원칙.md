@@ -1,3 +1,4 @@
+# Object Oriented Design
 # 객체 지향 설계 5원칙 (SOLID)
 * SRP(Single Responsibility Principle): 단일 책임 원칙
 * OCP(Open Closed Principle): 개방 폐쇄 원칙
