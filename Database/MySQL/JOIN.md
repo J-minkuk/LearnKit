@@ -30,7 +30,7 @@ id | language
 7 | Kotlin
 8 | JavaScript
 
-### framewords
+### frameworks
 id | frameworkName
 ---|---------------
 1 | Spring MVC
@@ -89,7 +89,7 @@ Like | Ruby
 Lion | Python
 Dev | Swift
 Dogs | Kotlin
-NULL | JavaScript
+**NULL** | JavaScript
 
 ---
 
