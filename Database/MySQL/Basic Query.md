@@ -131,3 +131,9 @@ ORDER BY column;
 ## BETWEEN with IN
 SELECT * FROM table<br/>
 WHERE (column1 BETWEEN 10 AND 20) AND NOT column2 IN (1, 2, 3);
+
+## EXISTS
+SELECT l.languageName, u.name<br/>
+FROM users u<br/>
+INNER JOIN languages l ON u.language_id = l.id<br/>
+WHERE EXISTS (SELECT u.name FROM users u WHERE u.name = 'Jo');
