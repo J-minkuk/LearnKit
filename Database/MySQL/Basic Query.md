@@ -1,5 +1,4 @@
 # Basic Query (SELECT)
-* [SELECT (DISTINCT)](##SELECT * FROM)
 * SELECT (DISTINCT)
 * WHERE
 * ORDER BY
@@ -11,7 +10,7 @@
 * [charlist] Wildcard
 * IN, BETWEEN
 
-##SELECT * FROM
+## SELECT * FROM
 SELECT DISTINCT column FROM table;
 <br/><br/>
 SELECT COUNT(DISTINCT column) FROM table;
