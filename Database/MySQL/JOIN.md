@@ -78,7 +78,7 @@ Dogs | Kotlin
 ## RIGHT JOIN
 SELECT u.name, l.languageName<br/>
 FROM users u<br/>
-LEFT JOIN languages l ON u.language_id = l.id;
+RIGHT JOIN languages l ON u.language_id = l.id;
 
 ### 결과 테이블
 name | languageName
