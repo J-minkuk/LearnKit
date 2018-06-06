@@ -7,7 +7,7 @@
 * 비동기 브라우저/서버 통신을 위해, XML을 대체할 수 있는 주요 데이터 포맷입니다.
 * XML은 모두 String이지만, 그에 비해 JSON은 데이터 타입을 갖습니다.
 
-# JSON과 Parser
+## JSON과 Parser
 * JSON도 많은 CPU와 메모리를 점유하며 응답 시간도 느립니다.
 * 가장 많이 사용되는 JSON Parser로는 Jackson JSON과 google-gson 등이 있습니다.
 * JSON 데이터는 Serialize와 Deserialize를 처리하는 성능이 좋지 않습니다.
