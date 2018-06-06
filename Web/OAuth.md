@@ -37,7 +37,7 @@ Access Token | 인증 후 Consumer가 Service Provider의 자원에 접근하기
 5. 안내 데스크에서 나방문씨에게 방문증을 발급해줍니다. | Access Token 발급
 6. 김목적씨와 나방문씨는 정해진 장소로 이동해 업무를 진행합니다. | Access Token을 이용해 서비스 정보 요청
 
-* Access Token을 방문증이라고 이해할 수 있습니다.
+* Access Token을 '방문증'이라고 이해할 수 있습니다.
 * 이 방문증으로 사전에 허락된 공간에 출입할 수 있습니다.
 * 마찬가지로 Access Token을 갖고 있는 Consumer는 사전에 호출이 허락된 Service Provider의 오픈 API를 호출할 수 있는 것입니다.
 
