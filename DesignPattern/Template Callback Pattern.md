@@ -1,7 +1,7 @@
 # 템플릿 콜백 패턴 (Template Callback Pattern)
 * 전략 패턴의 변형으로, 스프링 3대 프로그래밍 모델 중 하나인 DI(의존성 주입)에서 사용하는 특별한 형태의 전략 패턴입니다.
 * 템플릿 콜백 패턴은 전략 패턴과 모든 것이 동일한데 전략을 익명 내부 클래스로 정의해서 사용한다는 특징이 있습니다.
-* Strategy Pattern.md 코드를 템플릿 콜백 패턴으로 바꿔보겠습니다.
+* [Strategy Pattern.md](/DesignPattern/Strategy%20Pattern.md)코드를 템플릿 콜백 패턴으로 바꿔보겠습니다.
 
 ### 코드
 ```
