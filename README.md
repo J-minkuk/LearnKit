@@ -6,3 +6,5 @@
 * [김종민님](#) - 스프링 입문을 위한 자바 객체 지향의 원리와 이해
 * [Guppy's 난중(개발)일기](https://wckhg89.github.io/)
 * [devetude 김종민님](https://github.com/devetude)
+* [_Jbee님](http://asfirstalways.tistory.com/)
+* [Naver_D2](https://d2.naver.com)
