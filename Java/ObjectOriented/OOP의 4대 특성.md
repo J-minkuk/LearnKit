@@ -1,6 +1,6 @@
 # 객체 지향의 4대 특성
 * 캡슐화(Encapsulation): 정보 은닉
-* 상속: 재사용 - 확장
+* 상속(Extends): 재사용 - 확장
 * 추상화(Abstraction): 모델링
 * 다형성(Polymorphism): 사용 편의
 

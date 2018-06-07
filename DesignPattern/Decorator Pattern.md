@@ -46,7 +46,7 @@ package decoratorPattern;
 
 public class ClientWithDecorator {
     public static void main(String[] args) {
-        IService decoratro = new Decorator();
+        IService decorator = new Decorator();
         System.out.println(decorator.runSomething());
     }
 }
