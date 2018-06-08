@@ -1,0 +1,191 @@
+# 스프링을 통한 의존성 주입
+* @Autowired
+* @Resource
+
+## @Autowired를 통한 속성 주입
+```
+[ 의사 코드 ]
+운전자가 종합 쇼핑몰에서 자동차를 구매 요청합니다.
+종합 쇼핑몰은 자동차를 생산합니다.
+종합 쇼핑몰은 타이어를 생산합니다.
+종합 쇼핑몰은 자동차에 타이어를 장착합니다.
+종합 쇼핑몰은 운전자에게 자동차를 전달합니다.
+```
+* XML 설정 파일
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+        
+    <context:annotation-config />
+    
+    <bean id="tire" class="exSpringAutowired.KoreaTire"></bean>
+    <bean id="americaTire" class="exSpringAutowired.AmericaTire"></bean>
+    <bean id="car" class="exSpringAutowired.Car"></bean>
+</beans>
+```
+* property 태그가 사라진 것을 확인할 수 있습니다.
+* @Autowired를 통해 car의 property를 자동으로 엮어줄 수 있으므로(자동 의존성 주입) 생략이 가능해진 것입니다.
+
+
+* 스프링 프레임워크를 반영한 코드
+```
+package exSpringAutowired;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+public class Car {
+    @Autowired
+    Tire tire;
+    
+    public String getTireBrand() {
+        return "장착된 타이어: " + tire.getBrand());
+    }
+}
+```
+* @Autowired는 type 기준 매칭을 합니다.
+* 만약 같은 타입을 구현한 클래스가 여러 개 있다면 그때 bean 태그의 id로 구분해서 매칭을 합니다.
+* 즉, @Autowired는 type과 id 중 type 구현에 우선순위가 있습니다.
+
+### 메커니즘 정리
+1. type을 구현한 빈이 있는가 ?
+    * 아니오: No matching bean 에러
+2. 빈이 1개 인가 ?
+    * 예: 유일한 빈을 객체에 할당
+    * 아니오: id가 일치하는 하나의 빈이 있는가 ?
+        * 예: 해당 빈을 객체에 할당
+        * 아니오: no unique bean 에러
+
+
+## @Resource를 통한 속성 주입
+```
+[ 의사 코드 ]
+운전자가 종합 쇼핑몰에서 자동차를 구매 요청합니다.
+종합 쇼핑몰은 자동차를 생산합니다.
+종합 쇼핑몰은 타이어를 생산합니다.
+종합 쇼핑몰은 자동차에 타이어를 장착합니다.
+종합 쇼핑몰은 운전자에게 자동차를 전달합니다.
+```
+
+* 스프링 프레임워크를 반영한 코드
+```
+package exSpringResource;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+public class Car {
+    @Resource
+    Tire tire;
+    
+    public String getTireBrand() {
+        return "장착된 타이어: " + tire.getBrand());
+    }
+}
+```
+* 바뀌는 부분은 @Autowired였던 부분뿐입니다.
+* @Autowired는 스프링의 어노테이션이고, @Resource는 자바 표준 어노테이션입니다.
+* @Resource의 경우 type과 id 가운데 @Autowired와는 다르게 id의 매칭 우선순위가 높습니다.
+
+## @Autowired vs @Resource
+* 먼저 두 어노테이션을 비교해보도록 하겠습니다.
+
+ / | @Autowired | @Resource
+---|------------|-----------
+출처 | 스프링 프레임워크 | 표준 자바
+소속 패키지 | org.springframework.beans.factory.annotation.Autowired | javax.annotation.Resource
+빈 검색 방식 | byType 먼저, 못 찾으면 byName | byName 먼저, 못 찾으면 byType
+특이사항 | @Qualifier("") 협업 | name 애트리뷰트
+byName 강제하기 | @Autowired<br/>@Qualifier("tire1") | @Resource(name="tire1")
+
+### 사례: XML 설정 - 일치하는 id가 하나 있지만 인터페이스를 구현하지 않은 경우
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<beans ...생략...>
+    <context:annotation-config />
+    
+    <bean id="tire" class="compareDI.Door"></bean>
+    <bean id="car" class="compareDI.Car"></bean>
+</beans>
+```
+```
+package compareDI;
+
+// tire 인터페이스를 구현하지 않았습니다.
+public class Door {
+
+}
+```
+* @Resource의 경우 Driver.java를 실행하면 다음과 같은 오류가 발생합니다.
+```
+Bean named 'tire' must be of type [compareDI.Tire], but was actually of type [compareDI.Door]
+```
+* @Autowired의 경우 Driver.java를 실행하면 다음과 같은 오류가 발생합니다.
+```
+No matching bean of type [compareDI.Tire] found for dependency: expected at least 1 bean which qualifies as autowire candidate for this dependency.
+Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+```
+* 위 사례를 보면 @Autowired와 @Resource를 바꿔서 사용하는데 크게 차이가 없다는 사실을 알 수 있습니다.
+* 그럼 둘 중 어떤 것을 사용해야 할까?
+* 자동으로 주입된다는 의미에서는 @Autowired가 명확해 보이지만 실제 Car 입장에서 보면 @Resource라는 표현이 더 어울립니다.
+* 그리고 나중에 스프링이 아닌 다른 프레임워크로 교체되는 경우를 대비한다면 자바 표준인 @Resource를 쓰는 것이 유리합니다.
+
+## @Resource vs <property> 태그
+* @Resource는 사실 <bean> 태그의 자식 태그인 <property> 태그로 해결될 수 있습니다.
+* 개발 생산성만 놓고 보면 @Resource가 더 낫지만, <property>의 경우 XML 파일만 봐도 DI 관계를 손쉽게 확인할 수 있고, 유지보수성이 좋습니다.
+
+### @Resource와 @Autowired의 고급 사례
+* XML 설정 - 2개의 bean이 tire 인터페이스를 구현하고 속성과 일치하는 id는 없지만 @Resource 어노테이션의 name 속성이 id와 일치하는 경우
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<beans ...생략...>
+    <context:annotation-config />
+    
+    <bean id="tire1" class="resourceName.KoreaTire"></bean>
+    <bean id="tire2" class="resourceName.AmericaTire"></bean>
+    <bean id="car" class="resourceName.Car"></bean>
+</beans>
+```
+```
+package resourceName;
+
+import javax.annotation.Resource;
+
+public class Car {
+    @Resource(name = "tire1")
+    Tire tire;
+    
+    public String getTireBrand() {
+        return "장착된 타이어: " + tire.getBrand();
+    }
+}
+```
+
+* 위와 같은 상황에서 @Autowired 활용
+```
+package resourceName;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+
+public class Car {
+    @Autowired
+    @Qualifier("tire1")
+    Tire tire;
+    
+    public String getTireBrand() {
+        return "장착된 타이어: " + tire.getBrand();
+    }
+}
+```
+
+### DI 마무리
+* 의존 관계가 new라고 단순화해서 표현했지만, 사실 변수에 값을 할당하는 모든 곳에 의존 관계가 생깁니다.
+* 즉, 대입 연산자(=)에 의해 변수에 값이 할당되는 순간 의존이 생긴다는 말입니다.
+* 변수가 지역 변수이건 속성이건, 할당되는 값이 리터럴이건 객체이건 의존은 발생합니다.
+* 의존 대상이 내부에 있을 수도 있고, 외부에 있을 수도 있습니다.
+* DI는 외부에 있는 의존 대상을 주입하는 것을 의미합니다.
+* 의존 대상을 구현하고 배치할 때 SOLID와 응집도는 높이고 결합도는 낮추라는 기본 원칙에 충실해야 프로젝트의 구현과 유지보수가 수월해집니다.

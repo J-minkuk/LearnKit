@@ -13,7 +13,7 @@
 ## GenericServlet
 * 서블릿 인터페이스만 구현하면 서블릿 컨테이너가 생성, 소멸 등의 생명주기 관리 작업을 수행할 수 있습니다.
 * 그런데 서블릿 컨테이너가 서블릿 관리를 위해 필요한 기능은 서블릿 스펙에 모두 정의되어 있으므로 서블릿 명세는 서블릿에 필요한 구현을 미리 작성해 GenericServlet이란 이름으로 제공합니다.
-* 이 GenericServlet 클래스는 추상 클래스이ㅣ지만 abstract void service(ServletRequest req, ServletResponse res)를 제외하고는 모두 구현된 일종의 서블릿을 위한 어댑터 역할을 제공합니다.
+* 이 GenericServlet 클래스는 추상 클래스이지만 abstract void service(ServletRequest req, ServletResponse res)를 제외하고는 모두 구현된 일종의 서블릿을 위한 어댑터 역할을 제공합니다.
 * 따라서 서블릿을 작성하는 프로그래머들은 반복적으로 동일한 서블릿 인터페이스를 구현하는 대신 GenericServlet을 상속받아 사용합니다.
 
 ## HttpServlet

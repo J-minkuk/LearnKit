@@ -1,0 +1,149 @@
+# AOP 기초 완성
+* 이번에는 After 어드바이스까지 추가해 살펴보도록 하겠습니다.
+* After 어드바이스는 해당 JoinPoint 메소드를 실행한 후에 실행됩니다.
+
+
+## POJO & XML 기반 코드
+```
+package aop001;
+
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.JoinPoint;
+
+@Aspect
+public class MyAspect {
+    public void before(JoinPoint joinPoint) {
+        System.out.println("얼굴 인식 확인: 문 개방");
+    }
+    
+    public void lockDoor(JoinPoint joinPoint) {
+        System.out.println("문 잠금");
+    }
+}
+```
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+        
+    <aop:aspectj-autoproxy />
+    
+    <bean id="myAspect" class="aop001.MyAspect"></bean>
+    <bean id="boy" class="aop001.Boy"></bean>
+    <bean id="girl" class="aop001.Girl"></bean>
+    
+    <aop:config>
+        <aop:aspect ref="myAspect">
+            <aop:before method="before" pointcut="execution(* runSomething())" />
+            <aop:after method="lockDoor" pointcut="execution(* runSomething())" />
+        </aop:aspect>
+    </aop:config>
+</beans>
+```
+
+## @ 어노테이션 기반 코드
+```
+package aop001;
+
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.JoinPoint;
+
+@Aspect
+public class MyAspect {
+    @Before("execution(* runSomething())")
+    public void before(JoinPoint joinPoint) {
+        System.out.println("얼굴 인식 확인: 문 개방");
+    }
+    
+    @After("execution(* runSomething())")
+    public void lockDoor(JoinPoint joinPoint) {
+        System.out.println("문 잠금");
+    }
+}
+```
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+        
+    <aop:aspectj-autoproxy />
+    
+    <bean id="myAspect" class="aop001.MyAspect"></bean>
+    <bean id="boy" class="aop001.Boy"></bean>
+    <bean id="girl" class="aop001.Girl"></bean>
+</beans>
+```
+
+* 위 XML 기반과 어노테이션 기반 코드에서 눈에 거슬리는 부분이 있는데 바로 중복되는 내용이 있다는 것입니다.
+
+## 리팩터링된 POJO 및 XML 기반 스프링 설정 파일
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+        
+    <aop:aspectj-autoproxy />
+    
+    <bean id="myAspect" class="aop001.MyAspect"></bean>
+    <bean id="boy" class="aop001.Boy"></bean>
+    <bean id="girl" class="aop001.Girl"></bean>
+    
+    <aop:config>
+        <aop:pointcut expression="execution(* runSomething())" id="iampc" />
+        <aop:aspect ref="myAspect">
+            <aop:before method="before" pointcut-ref="iampc" />
+            <aop:after method="lockDoor" pointcut-ref="iampc" />
+        </aop:aspect>
+    </aop:config>
+</beans>
+```
+
+## 리팩터링된 어노테이션 기반 MyAspect.java
+```
+package aop001;
+
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.JoinPoint;
+
+@Aspect
+public class MyAspect {
+    @Pointcut("execution(* runSomething())")
+    private void iampc() {
+        // 여긴 무엇을 작성해도 의미가 없습니다.
+    }
+
+    @Before("iampc()")
+    public void before(JoinPoint joinPoint) {
+        System.out.println("얼굴 인식 확인: 문 개방");
+    }
+    
+    @After("iampc()")
+    public void lockDoor(JoinPoint joinPoint) {
+        System.out.println("문 잠금");
+    }
+}
+```

@@ -1,0 +1,131 @@
+# Aspect-Oriented Programming (AOP) - 관점 지향 프로그래밍
+* 스프링 DI가 의존성(new)에 대한 주입이라면 스프링 AOP는 로직(code) 주입이라고 할 수 있습니다.
+* 입금, 출금, 이체 모듈에서 로깅, 보안, 트랜잭션 기능이 반복적으로 나타나는 것을 볼 수 있습니다.
+* 프로그램을 작성하다 보면 이처럼 다수의 모듈에 공통적으로 나타나는 부분이 존재하는데, 이것을 횡단 관심사(cross-cutting concern)라고 합니다.
+* DB 연동 프로그램을 작성한 적이 있다면 insert, update, delete, select 연산에 항상 반복해서 등장하는 다음과 같은 형태의 코드를 본 적이 있을 것입니다.
+
+```
+DB 커넥션 준비
+Statement 객체 준비
+
+try {
+    DB 커넥션 연결
+    Statement 객체 세팅
+    insert / update / delete / select 실행    <- 핵심 관심사
+} catch ... {
+    예외 처리
+} catch ... {
+    예외 처리
+} finally {
+    DB 자원 반납
+}
+``` 
+* 코드 = 핵심 관심사 + 횡단 관심사
+
+## 일단 AOP 적용해보기
+```
+package aop001;
+
+public interface Person {
+    void runSomething();
+}
+```
+```
+package aop001;
+
+public class Boy implements Person {
+    public void runSomething() {
+        System.out.println("노트북으로 코딩을 한다.");
+    }
+}
+```
+```
+package aop001;
+
+public class Girl implements Person {
+    public void runSomething() {
+        System.out.println("맥북으로 코딩을 한다.");
+    }
+}
+```
+```
+package aop001;
+
+import 생략;
+
+public class Start {
+    public static void main(String[] args) {
+        ApplicationContext context = new ClassPathXmlApplicationContext("aop001/aop001.xml");
+        
+        Person mingood = context.getBean("boy", Person.class);
+        Person minsoon = context.getBean("girl", Person.class);
+        
+        mingood.runSomething();
+        minsoon.runSomething();
+    }
+}
+```
+* XML 설정 파일
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+        
+    <aop:aspectj-autoproxy />
+    
+    <bean id="myAspect" class="aop001.MyAspect"></bean>
+    <bean id="boy" class="aop001.Boy"></bean>
+    <bean id="girl" class="aop001.Girl"></bean>
+</beans>
+```
+* MyAspect.java
+```
+package aop001;
+
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.JoinPoint;
+
+@Aspect
+public class MyAspect {
+    // @Before("execution(public void aop001.Boy.runSomething())")
+    @Before("execution(* runSomething())")
+    public void before(JoinPoint joinPoint) {
+        System.out.println("얼굴 인식 확인: 문 개방");
+        // System.out.println("열쇠로 문을 열고 집에 들어간다.");
+    }
+}
+```
+
+## 일단 AOP 적용해보기 - 설명
+* @Aspect는 이 클래스를 이제 AOP에서 사용하겠다는 의미입니다.
+* @Before는 대상 메소드 실행 전 이 메소드를 실행하겠다는 의미입니다.
+* JoinPoint는 @Before에서 선언된 메소드인 aop001.Boy.runSomething()을 의미합니다.
+* 개발할 때는 1개의 Boy.java를 4개의 파일로 분할해서 개발해야 하는 수고를 해야하지만, 추가 개발과 유지보수 관점에서 보면 매우 편한 코드가 된 것을 알 수 있습니다.
+* AOP를 적용하면서 Boy.java에 단일 책임 원칙(SRP)을 자연스럽게 적용한 것입니다.
+* 프로젝트 팀에서 1명의 개발자만 Aspect 관련 코딩을 깔끔하게 해주면 다른 개발자들은 횡단 관심사는 신경 쓰지 않고 핵심 관심사만 코딩할 수 있게 됩니다.
+* 로직 주입이 가능한 곳
+    1. Around (메소드 전 구역)
+    2. Before (메소드 시작 전)
+    3. After (메소드 종료 후)
+    4. AfterReturning (메소드 정상 종료 후)
+    5. AfterThrowing (메소드에서 예외가 발생하면서 종료된 후)
+
+### aop001.xml
+* aop001.xml에는 3개의 빈이 설정되어 있습니다.
+* 빈이 설정되는 이유는 객체의 생성과 의존성 주입을 스프링 프레임워크에 위임하기 위함입니다.
+* 물론 스프링 프레임워크는 객체 생성뿐 아니라 객체의 생명주기 전반에 걸쳐 빈의 생성에서 소멸까지 관리합니다.
+* boy 빈과 girl 빈은 AOP 적용 대상이기 때문에 등록할 필요가 있고, myAspect 빈은 AOP의 Aspect이기 때문에 등록할 필요가 있습니다.
+* <aop:aspectj-autoproxy />는 프록시 패턴을 이용해 횡단 관심사를 핵심 관심사에 주입합니다.
+
+### 스프링 AOP의 핵심
+* 인터페이스 기반
+* 프록시 기반
+* 런타임 기반
