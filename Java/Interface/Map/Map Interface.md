@@ -38,3 +38,8 @@ Set<Map, Entry<K, V>> entrySet() | 등록된 데이터 항목들의 목록을 Se
 V remove(K k) | (Key: k)로 등록되어 있던 데이터를 제거합니다.<br/>리턴 값은 (Key: k)로 이미 등록되어 있던 value입니다.<br/>등록되어 있던 value가 없으면 null을 리턴합니다.
 int size() | 등록된 데이터 항목의 수를 리턴합니다.
 Collection<V> values() | 등록된 value 목록을 Collection 타입으로 리턴합니다.
+
+## Objects Class
+* equals 메소드와 hashCode 메소드를 재정의할 때 편리하게 사용할 수 있는 메소드가 포함되어 있다.
+* 예) Objects.hash(name, age);
+* 예) Objects.equals(this.name, p.name);
