@@ -1,12 +1,13 @@
 # 싱글턴 패턴 (Singleton Pattern)
 * 싱글턴 패턴이란 인스턴스를 하나만 만들어 사용하기 위한 패턴입니다.
-* 커넥션 풀, 스레드 풀, 디바이스 설정 객체 등과 같은 경우 인스턴스를 여러 개 만들게 되면 불필요한 자원을 사용하게 되고, 
+* 커넥션 풀, 스레드 풀, 디바이스 설정 객체 등과 같은 경우<br/>
+인스턴스를 여러 개 만들게 되면 불필요한 자원을 사용하게 되고,<br/> 
 또 프로그램이 예상치 못한 결과를 낳을 수 있습니다.
-* 싱글턴 패턴은 오직 인스턴스를 하나만 만들고 그것을 계속해서 재사용합니다.
+* 싱글턴 패턴은 오직 **인스턴스를 하나만** 만들고 그것을 계속해서 재사용합니다.
 * 싱글턴 패턴을 적용할 경우 의미상 두 개의 객체가 존재할 수 없습니다.
 * 이를 구현하려면 객체 생성을 위한 new에 제약을 걸어야 하고, 만들어진 단일 객체를 반환할 수 있는 메소드가 필요합니다.
 
-* 따라서 다음과 같은 3가지 요소가 반드시 필요합니다.
+* 따라서 다음과 같은 **3가지 요소**가 반드시 필요합니다.
     1. new를 실행할 수 없도록 생성자에 private 접근 제어자를 지정합니다.
     2. 유일한 단일 객체를 반환할 수 있는 정적 메소드가 필요합니다.
     3. 유일한 단일 객체를 참조할 정적 참조 변수가 필요합니다.
@@ -17,7 +18,7 @@ package singletonPattern;
 public class Singleton {
     static Singleton singletonObject;   // 정적 참조 변수
     
-    private Singleton() { };            // private 생성자
+    private Singleton() {};             // private 생성자
     
     // 객체 반환 정적 메소드
     public static Singleton getInstance() {
@@ -29,7 +30,8 @@ public class Singleton {
 }
 ```
 
-* getInstance() 정적 메소드를 보면 정적 참조 변수에 객체가 할당되어 있지 않은 경우에만 new를 통해 객체를 만들고 정적 참조 변수에 할당합니다.
+* getInstance() 정적 메소드를 보면 정적 참조 변수에 객체가 할당되어 있지 않은 경우에만 new를 통해 객체를 만들고<br/>
+정적 참조 변수에 할당합니다.
 * 그리고 정적 참조 변수에 할당되어 있는 유일한 객체의 참조를 반환합니다.
 * 이를 사용하는 테스트 코드를 보겠습니다.
 ```
@@ -37,8 +39,10 @@ package singletonPattern;
 
 public class Client {
     public static void main(String[] args) {
-        // private 생성자이므로 new를 통해 인스턴스를 생성할 수 없습니다.
-        // Singleton s = new Singleton();
+        /* 
+         * private 생성자이므로 new를 통해 인스턴스를 생성할 수 없습니다.
+         * Singleton s = new Singleton();
+         */
         
         Singleton s1 = Singleton.getInstance();
         Singleton s2 = Singleton.getInstance();

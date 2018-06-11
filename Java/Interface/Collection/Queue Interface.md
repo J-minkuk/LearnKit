@@ -1,13 +1,14 @@
 # Queue Interface
 * 데이터를 담아 두었다가 먼저 들어온 데이터부터 처리하기 위해서 사용됩니다.
-* 예를 들어, SMS와 같은 문자를 처리할 때 서버에서 들어오는 순서대로 처리하려면 이 Queue에 넣고, 처음 요청 받은 데이터부터 처리하면 됩니다.
+* 예를 들어, SMS와 같은 문자를 처리할 때 서버에서 들어오는 순서대로 처리하려면 이 Queue에 넣고,<br/>
+처음 요청 받은 데이터부터 처리하면 됩니다.
 
 ## List도 순서가 있고, Queue도 순서가 있는데 왜 굳이 Queue가 필요할까 ?
 * List의 가장 큰 단점은 데이터가 많은 경우 처리 시간이 늘어난다는 점입니다.
-* ArrayList의 경우 가장 앞에 있는 데이터(0번 데이터)를 지우면 그 다음 1번 데이터부터 마지막 데이터까지 한 칸씩 옮기는 작업을
-수행해야 하므로, 데이터가 적을 때는 상관없지만, 데이터가 많으면 많을수록 가장 앞에 있는 데이터를 지우는데 소요되는
-시간이 증가됩니다.
-* LinkedList의 경우 순차적으로 찾아가야 하기 때문에 가장 뒤에 있는 데이터를 지우는데 소요되는 시간이 증가합니다. 
+* **ArrayList**의 경우 가장 앞에 있는 데이터(0번 데이터)를 지우면<br/>
+그 다음 1번 데이터부터 마지막 데이터까지 한 칸씩 옮기는 작업을 수행해야 하므로,<br/>
+데이터가 적을 때는 상관없지만, 데이터가 많으면 많을수록 가장 앞에 있는 데이터를 지우는데 소요되는 시간이 증가됩니다.
+* **LinkedList**의 경우 순차적으로 찾아가야 하기 때문에 가장 뒤에 있는 데이터를 지우는데 소요되는 시간이 증가합니다. 
 
 ## Queue Interface를 구현한 클래스
 * Queue 인터페이스를 구현한 클래스는 두 가지로 분류됩니다.
@@ -47,10 +48,12 @@ class Person implements Comparable<Person> {
 }
 ```
 
-* getPriorityQueue 메소드를 구현합니다. 이 메소드에서는 Person 객체를 생성하여 PriorityQueue에 넣고 해당 PriorityQueue를 반환합니다.
+* getPriorityQueue 메소드를 구현합니다.
+* 이 메소드에서는 Person 객체를 생성하여 PriorityQueue에 넣고 해당 PriorityQueue를 반환합니다.
 * Person 클래스에 Comparable 인터페이스를 구현하지 않고 PriorityQueue에 집어넣으면 어떻게 될까 ?
-    > offer는 큐 한쪽 끝에 element를 저장하는데, 이때 다형성을 이용하여 추가되는 element 객체를 Comparable 인터페이스로
-    Up Casting 합니다. 하지만, Comparable 인터페이스를 구현한 객체가 아니라면 다음과 같은 에러 메시지를 볼 수 있습니다.
+    > offer는 큐 한쪽 끝에 element를 저장하는데,<br/>
+    이때 다형성을 이용하여 추가되는 element 객체를 Comparable 인터페이스로 Up Casting 합니다.<br/>
+    하지만, Comparable 인터페이스를 구현한 객체가 아니라면 다음과 같은 에러 메시지를 볼 수 있습니다.
     ```
     Exception in thread "main" java.lang.ClassCastException: Person cannot be cast to java.lang.Comparable
     ```

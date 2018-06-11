@@ -23,11 +23,14 @@ public class ClientWithNoProxy {
 }
 ```
 
+---
+
 * 이번에는 프록시 패턴이 적용된 코드를 보도록 하겠습니다.
 * 프록시 패턴의 경우 실제 서비스 객체가 가진 메소드와 같은 이름의 메소드를 사용하는데, 이를 위해 인터페이스를 사용합니다.
-* 인터페이스를 사용하면 서비스 객체가 들어갈 자리에 대리자 객체를 대신 투입해 
-클라이언트 쪽에서는 실제 서비스 객체를 통해 메소드를 호출하고 반환값을 받는지, 
-대리자 객체를 통해 메소드를 호출하고 반환값을 받는지 전혀 모르게 처리할 수도 있습니다.
+* 인터페이스를 사용하면 서비스 객체가 들어갈 자리에 대리자 객체를 대신 투입해<br/> 
+클라이언트 쪽에서는 실제 서비스 객체를 통해 메소드를 호출하고 반환값을 받는지,<br/> 
+대리자 객체를 통해 메소드를 호출하고 반환값을 받는지<br/>
+전혀 모르게 처리할 수도 있습니다.
 ```
 package proxyPattern;
 
@@ -39,6 +42,7 @@ public interface IService {
 package proxyPattern;
 
 public class Service implements IService {
+    @Override
     public String runSomething() {
         return "서비스";
     }
@@ -50,6 +54,7 @@ package proxyPattern;
 public class Proxy implements IService {
     IService service1;
     
+    @Override
     public String runSomething() {
         service1 = new Service();
         return service1.runSomething();
@@ -67,6 +72,8 @@ public class ClientWithProxy {
     }
 }
 ```
+
+---
 
 ## 프록시 패턴의 중요 포인트
 * 대리자는 실제 서비스와 같은 이름의 메소드를 구현하는데, 이때 인터페이스를 사용합니다.

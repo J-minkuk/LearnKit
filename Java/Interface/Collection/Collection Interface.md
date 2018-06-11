@@ -31,10 +31,10 @@ boolean contains(Object o) | 파라미터 o와 동일한 값이 들어있는지 
 boolean equals(Object o) | 객체 o와 this 객체의 equality를 비교합니다.<br/>equals 메소드를 호출해서 비교합니다.
 int hashCode() | 내부 객체 목록까지 고려하여 hash code 값을 계산해 리턴합니다.
 boolean isEmpty() | 목록이 비어있는지 확인합니다.
-Iterator<E> iterator() | 내부 목록에 들어있는 항목을 하나씩 탐색하기 위한 Iterator 객체를 생성하여 리턴합니다.
+Iterator<E> iterator() | 내부 목록에 들어있는 항목을<br/>하나씩 탐색하기 위한 Iterator 객체를 생성하여 리턴합니다.
 boolean remove(Object o) | 파라미터 o와 동일한 값(equals)을 목록에서 찾아 제거합니다.<br/>파라미터 값이 null이면 null을 찾아서 제거합니다.
-boolean removeAll(Collection c) | 파라미터로 주어진 목록 객체 c에 들어있는 항목들을 this 객체에서 찾아 전부 제거합니다.
-boolean retainAll(Collection c) | 파라미터로 주어진 목록 객체 c에 들어있지 않은 항목들을 this 객체에서 찾아 전부 제거합니다.<br/>c에 들어있는 항목들만 this 객체에 남습니다.
+boolean removeAll(Collection c) | 파라미터로 주어진 목록 객체 c에 들어있는 항목들을<br/>this 객체에서 찾아 전부 제거합니다.
+boolean retainAll(Collection c) | 파라미터로 주어진 목록 객체 c에 들어있지 않은 항목들을<br/>this 객체에서 찾아 전부 제거합니다.<br/>c에 들어있는 항목들만 this 객체에 남습니다.
 int size() | 내부 목록에 들어있는 항목의 수 리턴합니다.
 Object[] toArray() | 목록 객체에 들어있는 항목들을 배열에 채워서 리턴합니다.<br/>리턴되는 배열의 타입은 Object[]입니다.
 E[] toArray(E[] a) | 목록 객체에 들어있는 항목들을 배열에 채워서 리턴합니다.<br/>리턴되는 배열의 타입은 파라미터로 주어진 배열의 타입과 같습니다.
