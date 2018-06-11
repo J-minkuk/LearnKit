@@ -64,6 +64,7 @@ public String checkClass(Object obj) {
 }
 ```
 * reflection 클래스를 활용해야 한다면 A보다 B 경우를 사용하도록 하자. (성능상 B 경우가 6배 빠릅니다.)
-> 추가적으로, 클래스의 메타 데이터 정보는 JVM의 Perm 영역에 저장됩니다. 만약 Class 클래스를 사용하여 많은 클래스를 동적으로 생성하는 일이 벌어지면
-Perm 영역이 더 이상 사용할 수 없게 되어 OutofMemoryError가 발생할 수 있습니다.
+> 추가적으로, 클래스의 메타 데이터 정보는 JVM의 Perm 영역에 저장됩니다.<br/>
+만약 Class 클래스를 사용하여 많은 클래스를 동적으로 생성하는 일이 벌어지면<br/>
+Perm 영역을 더 이상 사용할 수 없게 되어 OutofMemoryError가 발생할 수 있습니다.
 

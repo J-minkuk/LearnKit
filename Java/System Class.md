@@ -3,8 +3,7 @@
 * 그 안에서 생성된 in, out, err과 같은 객체들도 static입니다.
 * 생성자(Constructor)도 없습니다.
 
-> 결론적으로, 우리는 System 객체를 생성할 수 없으며,<br/>
-> System.XXX와 같은 방식을 사용해야 합니다.
+> 결론적으로, 우리는 System 객체를 생성할 수 없으며, System.XXX와 같은 방식을 사용해야 합니다.
 
 ### 알아두면 유용한 System 클래스 메소드
 * static void arraycopy(Object src, int srcPos, Object dest, int destPos, int length)
