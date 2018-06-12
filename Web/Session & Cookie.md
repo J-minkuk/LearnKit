@@ -10,10 +10,14 @@
 * session-id가 존재하지 않으면 session을 생성해 response-header에 session-id를 추가한 다음 리턴합니다.
 * 웹 브라우저가 종료되거나 session이 만료되지 않는 이상 session-id를 통해 session에 접근합니다.
 
+---
+
 ## Cookie
 * cookie는 session과 반대로 사용자의 하드에 데이터를 저장하는 방식입니다.
 * 만료 시간을 과거로 설정하면 cookie는 저장되지 않고 바로 삭제됩니다.
 * session과 달리 영구적으로 저장할 수 있기 때문에 보안성이 낮습니다.
+
+---
 
 ## Local Storage
 * 사용자의 정보를 사용자의 하드에 저장한다는 점은 cookie와 동일하지만 용도가 다릅니다.

@@ -2,6 +2,7 @@
 
 ## @RestController의 동작 방식
 * @RestController는 @Controller 어노테이션과 @ResponseBody 어노테이션을 합쳐놓은 어노테이션입니다.
+    > @RestController = @Controller + @ResponseBody
 * 클래스 상단에 @RestController 어노테이션을 선언하면 아래의 코드와 동일하게 동작합니다.
 
 ```
@@ -15,6 +16,8 @@ public class JacksonController {
     }
 }
 ```
+
+---
 
 ## @Controller와 @RestController의 차이
 ### @Controller
@@ -34,9 +37,10 @@ public class IndexController {
 ![controller_flow](./img/controller_flow.png)
 
 ### @RestController
-* @Controller에 반해 @RestController에서 return 되는 값은 view를 통해서 출력되는 것이 아니라
+* @Controller에 반해 @RestController에서 return 되는 값은 view를 통해서 출력되는 것이 아니라<br/>
 HTTP ResponseBody에 직접 쓰여지게 됩니다.
-* @ResponseBody 는 값을 리턴할 타입을 보고 알맞은 MessageConverter를 찾아 적절한 응답 형태로 변환한 후 Http ResponseBody에 직접 쓰여 응답을 해주는 것입니다.
+* @ResponseBody는 값을 리턴할 타입을 보고 알맞은 MessageConverter를 찾아 적절한 응답 형태로 변환한 후<br/>
+Http ResponseBody에 직접 쓰여 응답을 해주는 것입니다.
 
 ```
 @RestController
@@ -60,17 +64,27 @@ public class StudentRestController {
 ```
 ![rest_controller_flow](./img/rest_controller_flow.png)
 
+---
+
+## Response Entity
+* Http의 상태 코드를 함께 전송하기 위해 사용됩니다.
+
 ## MessageConverter
 * 적절한 응답을 하기 위해 응답을 바꿔주는 MessageConverter들은 HttpMessageConverter 인터페이스를 상속 받고 있습니다.
+
 * 몇가지 대표적은 응답을 해주는 MessageConverter는 다음과 같습니다.
-    * application/json 형태의 응답: MappingJackson2HttpMessageConverter
-    * application/xml 또는 text/xml 형태의 응답: MarshallingHttpMessageConverter
+    * **application/json 형태의 응답: MappingJackson2HttpMessageConverter**
+    * **application/xml 또는 text/xml 형태의 응답: MarshallingHttpMessageConverter**
+    
 * 이외에도 다양한 종류의 응답 형태로 변환해주는 MessageConverter가 있습니다.
-    > Spring Boot 기반에서는 대부분의 MessageConverter를 <code>spring-boot-starter-web</code> 의존성을 통해 자동으로 세팅합니다.
+    > Spring Boot 기반에서는 대부분의 MessageConverter를 <code>spring-boot-starter-web</code> 의존성을 통해<br/>
+    자동으로 세팅합니다.
     
 ## MappingJackson2HttpMessageConverter 동작 방식
 
 ### org.codehaus.jackson VS com.fasterxml.jackson.core
 * json 형태의 Http 응답으로 바꿔주는 라이브러리는 대표적으로 2가지가 있습니다.
-* 결론적으로, com.fasterxml.jackson.core 라이브러리를 사용해야 합니다. (현재까지도 꾸준히 관리되고 있는 라이브러리이기 때문입니다.)
+
+* 결론적으로, com.fasterxml.jackson.core 라이브러리를 사용해야 합니다.<br/>
+(현재까지도 꾸준히 관리되고 있는 라이브러리이기 때문입니다.)
 
