@@ -21,11 +21,13 @@
 
 ### DataSource와 Connection Pool의 차이
 * **DataSource는 JDK 1.4 버전부터 생긴 표준입니다.**
+
 * Connection Pool로 연결을 관리해야 하고, 트랜잭션 관리도 가능하도록 만들어야 합니다.
+
 * **DataSource가 Connection Pool을 포함한다고 생각하면 됩니다.**
-> 유의할 점: DB Connection Pool은 자바 표준으로 지정되어 있는 것이 없습니다.
-> 따라서, WAS에 따라 사용법이 많이 다를 수 있습니다.
-> 그러나, DataSource는 자바 표준이므로 WAS에 관계 없이 사용법이 동일합니다.
+> 유의할 점: DB Connection Pool은 자바 표준으로 지정되어 있는 것이 없습니다.<br/>
+따라서, WAS에 따라 사용법이 많이 다를 수 있습니다.<br/>
+그러나, DataSource는 자바 표준이므로 WAS에 관계 없이 사용법이 동일합니다.
 
 ## PreparedStatement
 다음과 같은 프로세스를 거칩니다.
@@ -46,7 +48,7 @@ execute() | 쿼리의 종류와 상관없이 쿼리를 수행합니다. 수행 �
 
 ## DB Connection Pool 및 스레드 개수 설정
 이 두 항목의 개수는 메모리와 관련이 있습니다. 많이 사용할수록 메모리를 많이 점유하게 됩니다.<br/>
-그렇다고 메모리를 위해 DB Connection Pool과 스레드 개수를 적게 지정하면,
+그렇다고 메모리를 위해 DB Connection Pool과 스레드 개수를 적게 지정하면,<br/>
 서버에서는 많은 요청을 처리하지 못하고 대기할 수 밖에 없습니다.
 
 * **스레드는 입구, DB Connection Pool은 출구라고 생각하면 됩니다.**
