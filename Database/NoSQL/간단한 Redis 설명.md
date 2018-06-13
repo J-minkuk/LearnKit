@@ -1,4 +1,4 @@
-## Redis (in Memory)
+## Redis (In Memory)
 * Key에 대한 단위 연산이 빠릅니다.
 * 하지만 여러 Key에 대한 연산은 느릴 수 있습니다.
 * 메모리를 저장소로 쓰는 경우, 아주 빠른 Get과 Put을 지원합니다.

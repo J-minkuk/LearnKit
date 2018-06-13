@@ -36,8 +36,8 @@ public void sample(DataVO data, String key) {
     }
 }
 ```
-* 이 소스의 문제는 toArray() 메소드를 반복해서 호출한다는 것입니다.
-* 그러므로 아래와 같이, toArray() 메소드가 반복되지 않도록 아래와 같이 for 문 밖으로 옮기는 것이 좋습니다.
+* 이 소스 코드의 문제는 toArray() 메소드를 반복해서 호출한다는 것입니다.
+* 그러므로, toArray() 메소드가 반복되지 않도록 아래와 같이 for 문 밖으로 옮기는 것이 좋습니다.
 
 ```
 public void sample(DataVO data, String key) {
@@ -48,7 +48,7 @@ public void sample(DataVO data, String key) {
         DataVO2[] dataVO2 = (DataVO2) treeSet2.toArray();
         int treeSet2Size = treeSet2.size();
         
-        for (int i = 0; i < treeSet2.size(); ++i) {
+        for (int i = 0; i < treeSet2Size; ++i) {
             DataVO2 data2 = dataVO2[i];
             ...
         }
