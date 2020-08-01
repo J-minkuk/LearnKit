@@ -1,6 +1,13 @@
-## HTTP (Hypertext Transfer Protocol)란?
+# HTTP (Hypertext Transfer Protocol)란?
 * HTTP는 서버와 클라이언트가 인터넷 상에서 데이터를 주고받기 위한 프로토콜입니다.
-* HTTP는 계속 발전하여 HTTP/2까지 등장한 상태입니다.
+
+## HTTP/1.1
+* HTTP/1.1은 기본적으로 Connection당 하나의 요청을 처리하도록 설계
+    * 동시 전송 불가
+
+
+
+---
 
 ## HTTP 작동 방식
 * HTTP는 서버/클라이언트 모델을 따릅니다.
