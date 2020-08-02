@@ -26,7 +26,7 @@ FROM(필수) | 어떤 이미지를 기반으로 이미지를 생성할지 설정
 MAINTAINER | 이미지를 생성한 사람의 정보 | MAINTAINER David <david@mail.com>
 RUN | FROM에서 설정한 이미지 위에서 스크립트 혹은 명령을 실행, RUN으로 실행한 결과가 새 이미지 생성되고, 실행 내역은 이미지의 히스토리에 남는다.<br>* FROM으로 설정한 이미지에 포함된 /bin/sh 실행 파일을 사용하게 되며 /bin/sh 실행 파일이 없으면 사용할 수 없다.<br>* RUN으로 실행한 결과는 캐시되며 다음 빌드 때 재사용한다. 재사용하지 않으려면 docker build 명령에서 --no-cache 옵션을 사용 | [RUN Example]
 CMD | 컨테이너가 시작되었을 때 스크립트 혹은 명령을 실행, CMD는 Dockerfile에서 한 번만 사용 가능 | [CMD Example]
-EXPOSE | 호스트와 연결할 포트 번호 설정, docker run 명령의 --expose 옵션과 동일 | [EXPOSE Example]
+EXPOSE | 호스트와 연결할 포트 번호 설정, docker run 명령의 --expose 옵션과 동일 | [EXPOSE EXAMPLE][###EXPOSE Example]
 ENV | 환경 변수 설정 (RUN, CMD, ENTRYPOINT에 적용됨) | [ENV Example]
 USER | 명령을 실행할 사용자 계정 설정
 WORKDIR | RUN, CMD, ENTRYPOINT의 명령이 실행될 경로 설정
