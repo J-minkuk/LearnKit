@@ -1,13 +1,11 @@
-# MinGOODdev's 생각 상자
-**오타를 발견하신다면 Issues에 남겨주세요.**<br>
-**잘못된 카테고리 분류가 있다면 Issues에 남겨주세요.**
+# 메모장
 
 ## Documents
 ### RDBMS & NoSQL
 * [MySQL Basic Query](Database/RDB/MySQL/1.%20Basic%20Query.md)
 * [MySQL Join](Database/RDB/MySQL/2.%20JOIN.md)
 * [MySQL Group By & Having](Database/RDB/MySQL/3.%20GROUP%20BY%20&%20HAVING.md)
-* [MySQL Engine (MyISAM & InnoDB)](Database/RDB/MySQL/MyISAM%20&%20InnoDB)
+* [MySQL Engine (MyISAM & InnoDB)](Database/RDB/MySQL/MyISAM%20&%20InnoDB.md)
 * [Index](Database/RDB/1.%20Index.md)
 * [Index 활용 최적화](Database/RDB/2.%20Index%20활용%20최적화.md)
 * [ACID](Database/RDB/ACID.md)
@@ -129,13 +127,10 @@
 
 ---
 
-### 감사 인사
-* [가장 존경하는](#) - 이승진 교수님
-* [저자: 이상민님](http://tuning-java.com/) - 자바 성능 튜닝 이야기
-* [저자: 최희탁님](#) - 웹 프로그래머를 위한 서블릿 컨테이너의 이해
-* [저자: 김종민님](#) - 스프링 입문을 위한 자바 객체 지향의 원리와 이해
-* [Guppy's 난중(개발)일기](https://wckhg89.github.io/)
-* [devetude 님](https://github.com/devetude)
-* [_Jbee 님](http://asfirstalways.tistory.com/)
+### Reference
+* 존경하는 이승진 교수님
+* 자바 성능 튜닝 이야기
+* 웹 프로그래머를 위한 서블릿 컨테이너의 이해
+* 스프링 입문을 위한 자바 객체 지향의 원리와 이해
 * [Naver_D2](https://d2.naver.com)
 * [TOAST_Meetup!](http://meetup.toast.com/)
