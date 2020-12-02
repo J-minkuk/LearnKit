@@ -42,6 +42,7 @@
 * [HashCode](Java/Method%20hashCode.md)
 * [HashCode & Equals](Java/Method%20hashCode%20&%20equals.md)
 * [Generic](Java/Generic.md)
+  * [과연 Deep Dive일까](https://github.com/Road-of-CODEr/we-hate-jvm/blob/master/Generic/README.md)
 * [Thread](Java/Thread)
     * [Process & Thread](Java/Thread/1.%20Process%20&%20Thread.md)
     * [Thread Class & Runnable Interface](Java/Thread/2.%20Thread%20Class%20&%20Runnable%20Interface.md)
@@ -66,6 +67,9 @@
 * [PSA](Spring%20Framework/PSA/PSA.md)
 * [Filter & Interceptor](Spring%20Framework/Filter%20&%20Interceptor.md)
 * [RestController](Spring%20Framework/RestController.md)
+
+### Spring Cloud
+* [Sleuth](https://github.com/Road-of-CODEr/we-hate-jvm/blob/master/Sleuth/README.md)
 
 ---
 
@@ -103,13 +107,3 @@
 ### [Design Pattern](DesignPattern)
 ### Network
 * [3-Way-HandShake & 4-Way-HandShake](Network/3-Way-HandShake%20&%204-Way-HandShake.md)
-
----
-
-### Reference
-* 존경하는 이승진 교수님
-* 자바 성능 튜닝 이야기
-* 웹 프로그래머를 위한 서블릿 컨테이너의 이해
-* 스프링 입문을 위한 자바 객체 지향의 원리와 이해
-* [Naver_D2](https://d2.naver.com)
-* [TOAST_Meetup!](http://meetup.toast.com/)
