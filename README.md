@@ -1,36 +1,6 @@
 # 메모장
 
-## Documents
-### RDBMS & NoSQL
-* [MySQL Basic Query](Database/RDB/MySQL/1.%20Basic%20Query.md)
-* [MySQL Join](Database/RDB/MySQL/2.%20JOIN.md)
-* [MySQL Group By & Having](Database/RDB/MySQL/3.%20GROUP%20BY%20&%20HAVING.md)
-* [MySQL Engine (MyISAM & InnoDB)](Database/RDB/MySQL/MyISAM%20&%20InnoDB.md)
-* [Index](Database/RDB/1.%20Index.md)
-* [Index 활용 최적화](Database/RDB/2.%20Index%20활용%20최적화.md)
-* [ACID](Database/RDB/ACID.md)
-* [Transaction Isolation](Database/RDB/Transaction%20Isolation.md)
-* [DB Connection & Connection Pool & DataSource](Database/DB%20Connection%20&%20Connection%20Pool%20&%20DataSource.md)
-* [NoSQL 이론](Database/NoSQL/1.%20NoSQL%20이론.md)
-* [NoSQL 개념 & 특징](Database/NoSQL/2.%20NoSQL%20개념과%20특징.md)
-* [Redis](Database/NoSQL/간단한%20Redis%20설명.md)
-
-### DataStructure
-* [Array](DataStructure/Array.md)
-* [ArrayList](DataStructure/ArrayList.md)
-* [LinkedList](DataStructure/LinkedList.md)
-* [B-Tree](DataStructure/B-Tree.md)
-* [Stack](DataStructure/Stack.md)
-* [Queue](DataStructure/Queue.md)
-
-### Design Pattern
-* [Transfer Object](DesignPattern/Transfer%20Object(Value%20Object).md)
-* [Service Locator](DesignPattern/Service%20Locator.md)
-* [Singleton](DesignPattern/Singleton%20Pattern.md)
-* [Proxy](DesignPattern/Proxy%20Pattern.md)
-* [Decorator](DesignPattern/Decorator%20Pattern.md)
-* [Strategy](DesignPattern/Strategy%20Pattern.md)
-* [Template Callback](DesignPattern/Template%20Callback%20Pattern.md)
+## Contents
 
 ### Java
 * [Call By Value & Reference](Java/Call%20By%20(Value,%20Reference).md)
@@ -79,20 +49,12 @@
     * [Thread Pool](Java/Thread/4.%20ThreadPool.md)
 * [Error & Exception](Java/Error%20&%20Exception.md)
 
-### Monitoring
-* [Profiling](Monitoring/Profiling.md)
-* [Profiling & APM](Monitoring/Profiling%20&%20APM.md)
-
-### Network
-* [3-Way-HandShake & 4-Way-HandShake](Network/3-Way-HandShake%20&%204-Way-HandShake.md)
-
-### Server Setting
-* [CentOS MySQL](Server/CentOS_MySQL.md)
+---
 
 ### Spring Framework
+* [Servlet](Spring%20Framework/Servlet.md)
+* [Servlet Container](Spring%20Framework/Servlet%20Container.md)
 * [JSP & Servlet의 기본 동작 원리](Spring%20Framework/JSP%20&%20Serlvet의%20기본적인%20동작%20원리.md)
-* [Filter & Interceptor](Spring%20Framework/Filter%20&%20Interceptor.md)
-* [RestController](Spring%20Framework/RestController.md)
 * [IoC & DI](Spring%20Framework/DI)
     * [Java, XML](Spring%20Framework/DI/1.%20IoC%20&%20DI%20(Java,%20XML).md)
     * [@Autowired & @Resource](Spring%20Framework/DI/2.%20IoC%20&%20DI%20(@Autowired%20&%20@Resource).md)
@@ -102,28 +64,45 @@
     * [AOP 용어](Spring%20Framework/AOP/3.%20AOP%20용어.md)
     * [AOP 기초 완성](Spring%20Framework/AOP/4.%20AOP%20기초%20완성.md)
 * [PSA](Spring%20Framework/PSA/PSA.md)
-* [ORM](Spring%20Framework/ORM.md)
+* [Filter & Interceptor](Spring%20Framework/Filter%20&%20Interceptor.md)
+* [RestController](Spring%20Framework/RestController.md)
 
-### Status Code
-* [상태 코드](StatusCode/StatusCode.md)
-
-### Tool
-* [nGrinder 설치 및 사용법](Tool/nGrinder%20설치%20및%20사용.md)
-* [nGrinder Script (조회)](Tool/nGrinder%20Script%20(조회).md)
+---
 
 ### Web
-* [Servlet Container](Web/1.%20Servlet%20Container.md)
-* [Servlet](Web/2.%20Servlet.md)
-* [Session & Cookie](Web/Session%20&%20Cookie.md)
-* [OAuth](Web/OAuth/1.%20OAuth.md)
-* [JWT](Web/OAuth/2.%20JWT.md)
 * [HTTP](Web/HTTP.md)
 * [URL 분석](Web/URL_분석.md)
 * [JSON](Web/JSON.md)
 * [Rest API](Web/REST%20API.md)
-* [Forward & Reverse Proxy](Web/Forward%20&%20Reverse%20Proxy.md)
+* [Session & Cookie](Web/Session%20&%20Cookie.md)
+* [OAuth](Web/OAuth/1.%20OAuth.md)
+* [JWT](Web/OAuth/2.%20JWT.md)
 * [MSA](Web/MSA.md)
-* [웹 서비스를 확장하려면](Web/웹%20서비스를%20확장하려면.md)
+* [Forward & Reverse Proxy](Web/Forward%20&%20Reverse%20Proxy.md)
+* [웹 서비스 확장](Web/웹%20서비스를%20확장하려면.md)
+
+---
+
+### RDBMS & NoSQL
+* [MySQL Basic Query](Database/RDB/MySQL/1.%20Basic%20Query.md)
+* [MySQL Join](Database/RDB/MySQL/2.%20JOIN.md)
+* [MySQL Group By & Having](Database/RDB/MySQL/3.%20GROUP%20BY%20&%20HAVING.md)
+* [MySQL Engine (MyISAM & InnoDB)](Database/RDB/MySQL/MyISAM%20&%20InnoDB.md)
+* [Index](Database/RDB/1.%20Index.md)
+* [Index 활용 최적화](Database/RDB/2.%20Index%20활용%20최적화.md)
+* [ACID](Database/RDB/ACID.md)
+* [Transaction Isolation](Database/RDB/Transaction%20Isolation.md)
+* [DB Connection & Connection Pool & DataSource](Database/DB%20Connection%20&%20Connection%20Pool%20&%20DataSource.md)
+* [NoSQL 이론](Database/NoSQL/1.%20NoSQL%20이론.md)
+* [NoSQL 개념 & 특징](Database/NoSQL/2.%20NoSQL%20개념과%20특징.md)
+* [Redis](Database/NoSQL/간단한%20Redis%20설명.md)
+
+---
+
+### [DataStructure](DataStructure)
+### [Design Pattern](DesignPattern)
+### Network
+* [3-Way-HandShake & 4-Way-HandShake](Network/3-Way-HandShake%20&%204-Way-HandShake.md)
 
 ---
 
