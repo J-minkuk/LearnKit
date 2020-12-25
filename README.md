@@ -3,6 +3,14 @@
 ## Contents
 
 ### Java
+**Java 버전별 특징 정리**
+
+version | description
+--------|---------
+5 | - generics<br>- enumeration<br>- annotation<br>- auto boxing/unboxing<br>- concurrency API<br>- static import<br>- 가변 파라미터
+7 | - diamond operator<br>- switch-case 문자열 가능<br>- try-with-resources<br>- multi-catch
+8 | - Lambda<br>- interface default method<br>- Optional<br>- 날짜와 시간 API(대표적인 예: LocalDateTime)<br>- Stream<br>- type, repeating annotation
+  
 * [Intro](Java/Intro.md)
 * [Static](Java/Static.md)
 * [Collection Interface](Java/Collection%20Interface.md)
