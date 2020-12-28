@@ -1,7 +1,7 @@
 # 프록시 패턴 (Proxy Pattern)
 * 프록시는 대리자, 대변인이라는 뜻을 가진 단어, 대리자/대변인이라고 하면 다른 누군가를 대신해 그 역할을 수행하는 존재
 
-### 프록시 패턴이 X
+### 프록시 패턴 X
 ```java
 public class Service {
     public String runSomething() {
