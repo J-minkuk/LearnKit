@@ -1,8 +1,8 @@
 # Transfer Object 패턴
-* Value Object라고도 불리는 Transfer Object는 데이터를 전송하기 위한 객체에 대한 패턴입니다.
-* Transfer Object 패턴은 Transfer Object를 만들어 하나의 객체에 여러 타입의 값을 전달하는 일을 수행합니다.
+* Value Object라고도 불리는 Transfer Object는 데이터를 전송하기 위한 객체에 대한 패턴
+* Transfer Object 패턴은 Transfer Object를 만들어 하나의 객체에 여러 타입의 값을 전달하는 일을 수행
 
-```
+```java
 public class PstReact {
 
   private int commentId;
