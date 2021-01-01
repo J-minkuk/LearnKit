@@ -59,7 +59,7 @@ version | description
 * [Servlet](Spring%20Framework/Servlet.md)
 * [Servlet Container](Spring%20Framework/Servlet%20Container.md)
 * [JSP & Servlet의 기본 동작 원리](Spring%20Framework/JSP%20&%20Serlvet의%20기본적인%20동작%20원리.md)
-* [IoC & DI](Spring%20Framework/DI)
+* [IoC & DI](Spring%20Framework/DI/IoC%20&%20DI.md)
     * [Java, XML](Spring%20Framework/DI/1.%20IoC%20&%20DI%20(Java,%20XML).md)
     * [@Autowired & @Resource](Spring%20Framework/DI/2.%20IoC%20&%20DI%20(@Autowired%20&%20@Resource).md)
 * [AOP](Spring%20Framework/AOP)
