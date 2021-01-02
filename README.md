@@ -71,8 +71,10 @@ version | description
 * [Filter & Interceptor](Spring%20Framework/Filter%20&%20Interceptor.md)
 * [RestController](Spring%20Framework/RestController.md)
 
-### Spring Cloud
-* [Sleuth](https://github.com/Road-of-CODEr/we-hate-jvm/blob/master/Sleuth/README.md)
+### Cloud
+* [Cloud & MSA](SpringCloud/Cloud%20&%20MSA.md)
+* [Hystrix](SpringCloud/Hystrix.md)
+* [Spring Cloud Sleuth](SpringCloud/sleuth/README.md)
 
 ---
 

@@ -1,0 +1,66 @@
+# Hystrix
+Latency Tolerance and Fault Tolerance for Distributed Systems
+
+## Hystrix 적용
+```java
+@HystrixCommand
+public String anyMethodWithExternal() {
+    URI uri = URI.create("http://127.0.0.1:8080/any");
+    return restTemplate.getForObject(uri, String.class);
+}
+```
+* ```@HystrixCommand```를 통해 이 메소드 호출을 ```intercept```해 대신 실행
+* 실행된 결과의 성공, 실패 여부를 기록하고 ```통계``` 산출
+* 산출된 통계에 따라 ```Circuit Open``` 여부를 판단하고 조치를 취함
+
+## Circuit Breaker
+**Circuit Open**
+* 서킷이 오픈된 메소드는 (주어진 시간동안) 호출이 ```제한```되고, 즉시 에러를 반환한다.
+* 기본 설정: 10초 동안 20개 이상의 호출이 발생했을 때, 50% 이상의 호출에서 에러가 발생하면 서킷이 오픈된다.
+
+**Why**
+* 특정 메소드의 지연이 시스템 전체의 Resource를 모두 소비하여 시스템 전체의 장애를 유발한다.
+* 특정 외부 시스템에서 계속 에러를 발생시킬 때, 지속적인 호출은 에러 상황을 더욱 악화시킨다.
+그래서 장애를 유발하는 외부 시스템 연동을 조기에 차단```(Fail Fast)```함으로써 시스템을 보호하기 위함이다.
+
+### Fallback
+Fallback 메소드는 서킷이 오픈된 경우 혹은 Exception이 발생한 경우 대신 호출된 method. 장애 발생시 Exception 대신 응답할 Default 구현을 넣는다.
+
+```java
+@EnableCircuitBreaker
+@SpringBootApplication
+public class Application {
+    ...
+}
+```
+```java
+@HystrixCommand(commandKey = "ExtDep1", fallbackMethod = "anyFallback")
+public String anyMethodWithExternal() {
+    URI uri = URI.create("http://127.0.0.1:8080/any");
+    return restTemplate.getForObject(uri,String.class);
+}
+
+public String anyFallback() {
+    return "No available";
+}
+```
+
+Timeout에 대한 처리
+```java
+@HystrixCommand(
+    commandKey = "ExtDep1", 
+    fallbackMethod = "anyFallback",
+    commandProperties = {
+        @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "500")  // default 1,000ms
+    }
+)
+public String anyMethodWithExternal() {
+    URI uri = URI.create("http://127.0.0.1:8080/any");
+    return restTemplate.getForObject(uri,String.class);
+}
+
+public String anyFallback() {
+    return "No available";
+}
+```
+설정 시간동안 메소드가 끝나지(return or exception) 않으면 Hystrix는 메소드를 실행중인 Thread에 interrupt()를 호출하고, 즉시 ```HystrixException```을 발생시킨다.
