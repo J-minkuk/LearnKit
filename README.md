@@ -72,9 +72,10 @@ version | description
 * [RestController](Spring%20Framework/RestController.md)
 
 ### Cloud
-* [Cloud & MSA](SpringCloud/Cloud%20&%20MSA.md)
-* [Hystrix](SpringCloud/Hystrix.md)
-* [Spring Cloud Sleuth](SpringCloud/sleuth/README.md)
+* [Cloud & MSA](SpringCloud/1.Cloud%20&%20MSA.md)
+* [Hystrix](SpringCloud/2.Hystrix.md)
+* [Ribbon](SpringCloud/3.Ribbon.md)
+* [Sleuth](SpringCloud/sleuth/README.md)
 
 ---
 
