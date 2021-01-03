@@ -75,6 +75,7 @@ version | description
 * [Cloud & MSA](SpringCloud/1.Cloud%20&%20MSA.md)
 * [Hystrix](SpringCloud/2.Hystrix.md)
 * [Ribbon](SpringCloud/3.Ribbon.md)
+* [Eureka](SpringCloud/4.Eureka.md)
 * [Sleuth](SpringCloud/sleuth/README.md)
 
 ---
