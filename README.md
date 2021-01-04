@@ -76,6 +76,7 @@ version | description
 * [Hystrix](SpringCloud/2.Hystrix.md)
 * [Ribbon](SpringCloud/3.Ribbon.md)
 * [Eureka](SpringCloud/4.Eureka.md)
+* [Feign](SpringCloud/5.Feign.md)
 * [Sleuth](SpringCloud/sleuth/README.md)
 
 ---
