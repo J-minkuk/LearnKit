@@ -77,7 +77,10 @@ version | description
 * [Ribbon](SpringCloud/3.Ribbon.md)
 * [Eureka](SpringCloud/4.Eureka.md)
 * [Feign](SpringCloud/5.Feign.md)
+* [Zuul](SpringCloud/6.Zuul.md)
 * [Sleuth](SpringCloud/sleuth/README.md)
+
+Cloud 부분은 예제 코드를 작성하면서 설명도 같이 추가해 나갈 예정
 
 ---
 
