@@ -53,6 +53,10 @@ version | description
 * [IO](Java/IO/IO.md)
     * [IO Model](Java/IO/IO%20Model.md)
 
+### [DataStructure](DataStructure)
+
+### [Design Pattern](DesignPattern)
+
 ---
 
 ### Spring Framework
@@ -119,9 +123,6 @@ Cloud 부분은 예제 코드를 작성하면서 설명도 같이 추가해 나�
 
 ---
 
-### [DataStructure](DataStructure)
-
-### [Design Pattern](DesignPattern)
-
 ### [Kotlin](Kotlin/README.md)
 
+### [Zookeeper](ETC/Zookeeper.md)
