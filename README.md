@@ -50,11 +50,12 @@ version | description
 * [String & StringBuffer & StringBuilder](Java/String/String%20&%20StringBuffer%20&%20StringBuilder.md)
 * [HashCode](Java/Method%20hashCode.md)
 * [HashCode & Equals](Java/Method%20hashCode%20&%20equals.md)
-* [Generic](Java/Generic.md)
+* **Generic**
+  * [Generic?](Java/Generic.md)
   * [과연 Deep Dive일까](https://github.com/Road-of-CODEr/we-hate-jvm/blob/master/Generic/README.md)
 * [Reflection Class](Java/Reflection/Reflection%20Class.md)
 * [System Class](Java/System%20Class.md)
-* [Thread](Java/Thread)
+* **Thread**
     * [Process & Thread](Java/Thread/1.%20Process%20&%20Thread.md)
     * [Thread Class & Runnable Interface](Java/Thread/2.%20Thread%20Class%20&%20Runnable%20Interface.md)
     * [Synchronized](Java/Thread/3.%20Synchronized.md)
@@ -93,10 +94,11 @@ version | description
 * [Servlet](Spring%20Framework/Servlet.md)
 * [Servlet Container](Spring%20Framework/Servlet%20Container.md)
 * [JSP & Servlet의 기본 동작 원리](Spring%20Framework/JSP%20&%20Serlvet의%20기본적인%20동작%20원리.md)
-* [IoC & DI](Spring%20Framework/DI/IoC%20&%20DI.md)
+* **IoC & DI**
+    * [IoC & DI 간단 정리](Spring%20Framework/DI/IoC%20&%20DI.md)
     * [Java, XML](Spring%20Framework/DI/1.%20IoC%20&%20DI%20(Java,%20XML).md)
     * [@Autowired & @Resource](Spring%20Framework/DI/2.%20IoC%20&%20DI%20(@Autowired%20&%20@Resource).md)
-* [AOP](Spring%20Framework/AOP)
+* **AOP**
     * [AOP란](Spring%20Framework/AOP/1.%20AOP.md)
     * [POJO와 XML 기반 AOP](Spring%20Framework/AOP/2.%20POJO와%20XML%20기반%20AOP.md)
     * [AOP 용어](Spring%20Framework/AOP/3.%20AOP%20용어.md)
@@ -106,6 +108,7 @@ version | description
 * [RestController](Spring%20Framework/RestController.md)
 
 ### Cloud
+Cloud 부분은 예제 코드를 작성하면서 설명도 같이 추가해 나갈 예정
 * [Cloud & MSA](SpringCloud/1.Cloud%20&%20MSA.md)
 * [Hystrix](SpringCloud/2.Hystrix.md)
 * [Ribbon](SpringCloud/3.Ribbon.md)
@@ -113,8 +116,6 @@ version | description
 * [Feign](SpringCloud/5.Feign.md)
 * [Zuul](SpringCloud/6.Zuul.md)
 * [Sleuth](SpringCloud/sleuth/README.md)
-
-Cloud 부분은 예제 코드를 작성하면서 설명도 같이 추가해 나갈 예정
 
 ---
 
@@ -143,9 +144,9 @@ Cloud 부분은 예제 코드를 작성하면서 설명도 같이 추가해 나�
 * [ACID](Database/RDB/ACID.md)
 * [Transaction Isolation](Database/RDB/Transaction%20Isolation.md)
 * [index](Database/RDB/1.%20Index.md)
-    * [index 활용 최적화](Database/RDB/2.%20Index%20활용%20최적화.md)
+* [index 활용 최적화](Database/RDB/2.%20Index%20활용%20최적화.md)
 * [MySQL Engine (MyISAM & InnoDB)](Database/RDB/MySQL/MyISAM%20&%20InnoDB.md)
-* **Query**
+* **Query Example**
     * [MySQL Basic Query](Database/RDB/MySQL/1.%20Basic%20Query.md) 
     * [MySQL Join](Database/RDB/MySQL/2.%20JOIN.md)
     * [MySQL Group By & Having](Database/RDB/MySQL/3.%20GROUP%20BY%20&%20HAVING.md)
