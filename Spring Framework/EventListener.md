@@ -188,7 +188,7 @@ public class ContextEventHandler {
 2021-01-10 02:57:00,875 | [main] INFO  - ## ContextRefreshedEvent
 2021-01-10 02:57:08,351 | [http-nio-8080-exec-8] INFO  - 회원 가입 완료
 2021-01-10 02:57:08,351 | [http-nio-8080-exec-8] INFO  - test HIGHEST_PRECEDENCE
-2021-01-10 02:57:08,351 | [mojitoAsyncTaskExecutor-2] INFO  - test async
+2021-01-10 02:57:08,351 | [asyncTaskExecutor-2] INFO  - test async
 2021-01-10 02:57:08,352 | [http-nio-8080-exec-8] INFO  - test 회원에게 가입 축하 메시지 발송 완료
 2021-01-10 02:57:08,352 | [http-nio-8080-exec-8] INFO  - test 회원에게 쿠폰 발송 완료
 2021-01-10 02:57:08,353 | [http-nio-8080-exec-8] INFO  - ## RequestHandledEvent url=[/sign-up]; client=[0:0:0:0:0:0:0:1]; method=[POST]; servlet=[dispatcherServlet]; session=[null]; user=[null]; time=[2ms]; status=[OK] / null
