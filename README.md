@@ -1,6 +1,16 @@
 # 메모장
 
 ## Contents
+* [Java](#Java)
+* [DataStructure](#DataStructure)
+* [Design Pattern](#Design-Pattern)
+* [Spring Framework](#Spring-Framework)
+* [Cloud](#Cloud)
+* [JPA](#JPA)
+* [Web](#Web)
+* [Database](#Database)
+* [Network](#Network)
+* [ETC](#ETC) - kotlin, zookeeper, mdc
 
 ### Java
 **Java 버전별 특징 정리**
@@ -55,9 +65,27 @@ version | description
 * [Atomic](Java/AtomicReference.md)
 * [ForkJoinPool](Java/ForkJoinPool.md)
 
-### [DataStructure](DataStructure)
+---
 
-### [Design Pattern](DesignPattern)
+### DataStructure
+* [Array](DataStructure/Array.md)
+* [ArrayList](DataStructure/ArrayList.md)
+* [LinkedList](DataStructure/LinkedList.md)
+* [Stack](DataStructure/Stack.md)
+* [Queue](DataStructure/Queue.md)
+* [B-Tree](DataStructure/B-Tree.md)
+
+---
+
+### Design Pattern
+* [Transfer Object](DesignPattern/Template%20Callback%20Pattern.md)
+* [Decorator](DesignPattern/Decorator%20Pattern.md)
+* [Template Callback](DesignPattern/Template%20Callback%20Pattern.md)
+* [Singleton](DesignPattern/Singleton%20Pattern.md)
+* [Proxy](DesignPattern/Proxy%20Pattern.md)
+* [Service Locator](DesignPattern/Service%20Locator.md)
+* [Strategy](DesignPattern/Strategy%20Pattern.md)
+* [Facade](DesignPattern/Facade%20Pattern.md)
 
 ---
 
@@ -109,16 +137,20 @@ Cloud 부분은 예제 코드를 작성하면서 설명도 같이 추가해 나�
 
 ---
 
-### RDBMS & NoSQL
-* [MySQL Basic Query](Database/RDB/MySQL/1.%20Basic%20Query.md)
-* [MySQL Join](Database/RDB/MySQL/2.%20JOIN.md)
-* [MySQL Group By & Having](Database/RDB/MySQL/3.%20GROUP%20BY%20&%20HAVING.md)
-* [MySQL Engine (MyISAM & InnoDB)](Database/RDB/MySQL/MyISAM%20&%20InnoDB.md)
-* [Index](Database/RDB/1.%20Index.md)
-* [Index 활용 최적화](Database/RDB/2.%20Index%20활용%20최적화.md)
+### Database
+**RDB**
+* [DB Connection & Connection Pool & DataSource](Database/DB%20Connection%20&%20Connection%20Pool%20&%20DataSource.md) 
 * [ACID](Database/RDB/ACID.md)
 * [Transaction Isolation](Database/RDB/Transaction%20Isolation.md)
-* [DB Connection & Connection Pool & DataSource](Database/DB%20Connection%20&%20Connection%20Pool%20&%20DataSource.md)
+* [index](Database/RDB/1.%20Index.md)
+    * [index 활용 최적화](Database/RDB/2.%20Index%20활용%20최적화.md)
+* [MySQL Engine (MyISAM & InnoDB)](Database/RDB/MySQL/MyISAM%20&%20InnoDB.md)
+* **Query**
+    * [MySQL Basic Query](Database/RDB/MySQL/1.%20Basic%20Query.md) 
+    * [MySQL Join](Database/RDB/MySQL/2.%20JOIN.md)
+    * [MySQL Group By & Having](Database/RDB/MySQL/3.%20GROUP%20BY%20&%20HAVING.md)
+    
+**NoSQL**
 * [NoSQL 이론](Database/NoSQL/1.%20NoSQL%20이론.md)
 * [NoSQL 개념 & 특징](Database/NoSQL/2.%20NoSQL%20개념과%20특징.md)
 * [Redis](Database/NoSQL/간단한%20Redis%20설명.md)
@@ -129,8 +161,7 @@ Cloud 부분은 예제 코드를 작성하면서 설명도 같이 추가해 나�
 * [3-Way-HandShake & 4-Way-HandShake](Network/3-Way-HandShake%20&%204-Way-HandShake.md)
 
 ---
-
-### [Kotlin](Kotlin/README.md)
-
-### [Zookeeper](ETC/Zookeeper.md)
-### [MDC](ETC/MDC.md)
+### ETC
+* [Kotlin](Kotlin/README.md)
+* [Zookeeper](ETC/Zookeeper.md)
+* [MDC](ETC/MDC.md)
