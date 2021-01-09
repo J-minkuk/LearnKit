@@ -90,6 +90,11 @@ Cloud 부분은 예제 코드를 작성하면서 설명도 같이 추가해 나�
 
 ---
 
+### JPA
+* [Lock](JPA/Lock.md)
+
+---
+
 ### Web
 * [HTTP](Web/HTTP.md)
 * [URL 분석](Web/URL_분석.md)
