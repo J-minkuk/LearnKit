@@ -4,12 +4,14 @@ ForkJoinPool은 ExecutorService와 유사, Thread Pool을 생성해 여러 작�
 
 ## Fork
 Task를 분할해 다른 스레드에서 처리한다는 의미
+
 ![fork](img/fork.png)
 > 이미지 출처: http://tutorials.jenkov.com/java-util-concurrent/java-fork-and-join-forkjoinpool.html
 
 ## Join
 다른 스레드에서 처리되는 결과를 기다렸다가 합친다는 의미. 
 즉, Parent는 Child에서 처리되는 Task가 완료될 때까지 기다린 후 결과를 합쳐 상위 Parent로 전달한다.
+
 ![join](img/join.png)
 > 이미지 출처: http://tutorials.jenkov.com/java-util-concurrent/java-fork-and-join-forkjoinpool.html
 
