@@ -118,7 +118,7 @@ Cloud 부분은 예제 코드를 작성하면서 설명도 같이 추가해 나�
 * [Eureka](SpringCloud/4.Eureka.md)
 * [Feign](SpringCloud/5.Feign.md)
 * [Zuul](SpringCloud/6.Zuul.md)
-* [Sleuth](SpringCloud/sleuth/README.md)
+* [Sleuth](SpringCloud/7.Sleuth.md)
 
 ---
 
