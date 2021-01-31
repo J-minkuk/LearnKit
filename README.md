@@ -111,7 +111,6 @@ version | description
 * [EventListener](Spring%20Framework/EventListener.md)
 
 ### Cloud
-Cloud 부분은 예제 코드를 작성하면서 설명도 같이 추가해 나갈 예정
 * [Cloud & MSA](SpringCloud/1.Cloud%20&%20MSA.md)
 * [Hystrix](SpringCloud/2.Hystrix.md)
 * [Ribbon](SpringCloud/3.Ribbon.md)
@@ -123,6 +122,7 @@ Cloud 부분은 예제 코드를 작성하면서 설명도 같이 추가해 나�
 ---
 
 ### JPA
+* [Intro](JPA/1.Intro.md)
 * [Lock](JPA/Lock.md)
 
 ---
