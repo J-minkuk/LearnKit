@@ -54,14 +54,14 @@ Java 8과 동일하게 메소드 구현이 가능하지만, 인스턴스 변수�
 data 클래스는 getter만 제공한다. (setter는 제공하지 않음)
 ```kotlin
 @Entity
-data class Post(
+class Post(
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    var id: Long,
     var title: String,
     var author: String,
     var content: String
 ) {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    var id: Long = 0
 }
 ```
 
