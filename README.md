@@ -123,6 +123,8 @@ version | description
 
 ### JPA
 * [Intro](JPA/1.Intro.md)
+* [영속성 관리](JPA/2.영속성관리.md)
+* [Proxy](JPA/3.Proxy.md)
 * [Lock](JPA/Lock.md)
 
 ---
