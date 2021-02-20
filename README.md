@@ -125,6 +125,7 @@ version | description
 * [Intro](JPA/1.Intro.md)
 * [영속성 관리](JPA/2.영속성관리.md)
 * [Proxy](JPA/3.Proxy.md)
+* [영속성 전이와 고아 객체](JPA/4.영속성%20전이와%20고아객체.md)
 * [Lock](JPA/Lock.md)
 
 ---
